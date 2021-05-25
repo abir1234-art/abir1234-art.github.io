@@ -1,0 +1,63 @@
+<?php
+class sendemail_test extends CI_Controller{
+
+public function contact()
+{
+    
+    $this->load->library('email');
+    $this->load->library('form_validation');
+
+    //Set form validation
+    $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+    $this->form_validation->set_rules('subject', 'Subject', 'trim|required|min_length[10]');
+    #$this->form_validation->set_rules('message', 'Message', 'trim|required|min_length[12]|max_length[200]');
+    $this->form_validation->set_rules('message', 'Message', 'trim|required');
+
+    //Run form validation
+    if ($this->form_validation->run() === FALSE)
+    {
+        $this->load->view('exemple/sendemail');
+    } else {
+
+        //Get the form data
+
+        $from_email = $this->input->post('email');
+        $subject = $this->input->post('subject');
+        $message = $this->input->post('message');
+
+        //Web master email
+        $to_email = 'ajotrans1@gmail.com'; //Webmaster email, who receive mails
+
+        //Mail settings
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'ssl://smtp.gmail.com';
+        $config['smtp_port'] = '465';
+        $config['smtp_user'] = 'ajotrans1@gmail.com'; // Your email address
+        $config['smtp_pass'] = 'bouarfa123'; // Your email account password
+        $config['mailtype'] = 'html'; // or 'text'
+        $config['charset'] = 'iso-8859-1';
+        $config['wordwrap'] = TRUE; //No quotes required
+        $config['newline'] = "\r\n"; //Double quotes required
+
+        $this->email->initialize($config);                        
+
+        //Send mail with data
+        $this->email->from($from_email, $name);
+        $this->email->to($to_email);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        
+        if ($this->email->send())
+        {
+            $this->session->set_flashdata('msg','<div class="alert alert-success">Mail sent!</div>');
+
+            redirect('adminpage');
+        } else {
+            $this->session->set_flashdata('msg','<div class="alert alert-danger">Problem in sending</div>');
+            $this->load->view('exemple/sendemail');
+        }
+
+    }
+}
+}
+?>

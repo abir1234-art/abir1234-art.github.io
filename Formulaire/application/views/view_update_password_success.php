@@ -1,0 +1,1 @@
+<h2><?php echo 'your password has been updating';?></h2>
