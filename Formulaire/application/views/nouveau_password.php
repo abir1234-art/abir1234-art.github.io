@@ -89,15 +89,7 @@
   </head>
 
   <body background="https://images.unsplash.com/photo-1557683304-673a23048d34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1443&q=80.jpg">
-  <nav class="navbar navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Godenighter Application</font></font></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Basculer la navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    </div>
-    </nav>
+  
 
  
     <div class="col-lg-4 col-lg-offset-2" style="position: absolute; left: 30% ; top: 20%;">
@@ -122,20 +114,19 @@
 
         <div class="form-group">
           <label for="email" >Email :</label>
-          <input class="form-control" type="email" name="email" id="email" placeholder="Enter your email"><br/>
+          <input class="form-control" type="email" name="email" id="email" placeholder="Entrer votre email"><br/>
           
         </div>
 
         <div class="form-group">
           <label for="password" >Nouveau mot de passe :</label>
-          <input class="form-control" type="password" name="password" id="password" placeholder="Enter your new password"><br />
+          <input class="form-control" type="password" name="password" id="password" placeholder="Entrer nouveau mot de passe"><br />
          
         </div>
 
         <div class="form-group">
           <label for="password2" >Confirmez mot de passe :</label>
-          <input class="form-control" type="password" name="password2" id="password2" placeholder="confiem
-           your password"><br />
+          <input class="form-control" type="password" name="password2" id="password2" placeholder="confirmez votre mot de passe"><br />
           
         </div>
 

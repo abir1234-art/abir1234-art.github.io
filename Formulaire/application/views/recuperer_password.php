@@ -102,15 +102,7 @@
   </head>
 
   <body background="https://images.unsplash.com/photo-1557683304-673a23048d34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1443&q=80.jpg">
-<nav class="navbar navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Godenighter Application</font></font></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Basculer la navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
 
-    </div>
-    </nav>
 
  
 
@@ -132,17 +124,17 @@
     
     <form action="" method="POST">
     
-    <h1 style="text-align:center" style="color:white">Forgot Password</h1>
+    <h1 style="text-align:center" style="color:white">Mot de passe oublier</h1>
     <div class="form-group"><br/>
           <label for="email"style="color:white" >Entrez votre Email:</label>
-         <input class="form-control" type="email" name="email" id="email" placeholder="Enter your email">
+         <input class="form-control" type="email" name="email" id="email" placeholder="Entrer votre email">
         </div>
         <br />
        
 
     <div class="text-center">
          
-          <button class="btn btn-primary" name="mpo" >Valider</button>
+          <button class="btn btn-primary" name="mpo" >Envoyer</button>
     </div>
      </div>
     </form>

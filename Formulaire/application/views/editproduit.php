@@ -13,45 +13,8 @@
 <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Hello, world!</title>
-    <link rel="stylesheet" type="text/css" href="<?php base_url(); ?>assets/css/bootstrap.css">
-    <style type="text/css">
- body{
-         background-repeat: no-repeat;
-         height: 100%;
-         background-position: center;
-         background-size: cover;
-         background-size: fixed
-       
-    
+    <style>
 
-
-   }
-     .btn{
-         margin-top: 40px;
-         margin-bottom: 150px;
-     }
-     input#file-input{
-       display : none;
-       margin-top: 100px;
-       margin-bottom: 350px;
-       width:800px;
-       height:1000px;
-     }
-     input#file-input + label{
-       background-color:#0066ff;
-       padding:8px;
-       color:#fff;
-       border:2px solid #9ec3ff;
-       border-radius:9px;
-       margin-left:20px;
-    
-     }
-     input#file-input + label:hover{
-       background-color:#3b73ce;
-       border-color:#729fe7;
-       cursor:pointer;
-
-     } 
 .blue {
 background:#2abdfc;
 color: #fff;
@@ -173,87 +136,6 @@ a[data-toggle="collapse"] {
     display: none;
   }
 }
-body, html {
-  height:100%;
-}
-
-/*
- * Off Canvas sidebar at medium breakpoint
- * --------------------------------------------------
- */
-@media screen and (max-width: 992px) {
-
-  .row-offcanvas {
-    position: relative;
-    -webkit-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
-  }
-
-  .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -33%;
-  }
-
-  .row-offcanvas-left.active {
-    left: 33%;
-    margin-left: -6px;
-  }
-
-  .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-    width: 33%;
-    height: 100%;
-  }
-}
-
-/*
- * Off Canvas wider at sm breakpoint
- * --------------------------------------------------
- */
-@media screen and (max-width: 34em) {
-  .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -45%;
-  }
-
-  .row-offcanvas-left.active {
-    left: 45%;
-    margin-left: -6px;
-  }
-  
-  .sidebar-offcanvas {
-    width: 45%;
-  }
-}
-
-.card {
-    overflow:hidden;
-}
-
-.card-body .rotate {
-    z-index: 8;
-    float: right;
-    height: 100%;
-}
-
-.card-body .rotate i {
-    color: rgba(20, 20, 20, 0.15);
-    position: absolute;
-    left: 0;
-    left: auto;
-    right: -10px;
-    bottom: 0;
-    display: block;
-    -webkit-transform: rotate(-44deg);
-    -moz-transform: rotate(-44deg);
-    -o-transform: rotate(-44deg);
-    -ms-transform: rotate(-44deg);
-    transform: rotate(-44deg);
-}
-
-
     </style>
   </head>
   <body>
@@ -270,12 +152,13 @@ body, html {
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <li class="nav-item active">
            <a class="nav-link" id="link" href="<?php echo base_url('auto/login');?>">
               <i class="fas fa-sign-out-alt"></i>
-          Déconnecté<span class="sr-only">(current) </span></a>
+              Déconnecté<span class="sr-only">(current) </span></a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" id="link" href="<?php echo base_url('sendemail');?>">
@@ -287,7 +170,7 @@ body, html {
 <div class="wrapper fixed-left">
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3><i class="fas fa-user"></i>Utilisateur</h3>
+        <h3><i class="fas fa-user"></i>Admin</h3>
       </div>
 
       <ul class="list-unstyled components">
@@ -301,10 +184,19 @@ body, html {
               <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listcommandes"> Vos Commandes</a>
+        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
         </li>
         <li>
-          <a href=""><i class="fas fa-clipboard"></i>Dashboard</a>
+        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
+        </li>
+        <li>
+        <a href="<?php echo base_url();?>auto/listfournisseurs"><i class="fas fa-user-cog"></i>Fournisseurs</a>
+        </li>
+        <li>
+        <a href="<?php echo base_url();?>auto/listcommandes">Commandes</a>
+        </li>
+        <li>
+        <a href="<?php echo base_url();?>control/liststocks">Stcoks</a>
         </li>
         <li>
           <a href=""><i class="fas fa-hands-helping"></i>Services</a>
@@ -314,34 +206,114 @@ body, html {
         </li>
       </ul>
     </nav>
-<div class="py-5">
-<div class="container">
-<div class="justify-content-center">
-<div class="col-md-12">
 
-<div class="Card">
-<div class="Card-header">
-<h5>User Page </h5>
-<?php if(isset($_SESSION['success'])){?>
-       <div class="alert alert-success"><?php echo $_SESSION['success'];?></div>
-    <?php
-    }
-    ?>
-    <br><br>
-    <a href="<?php echo base_url();?>auto/logout">Logout</a>
-</div>
-<div class="Card-body">
-<h6 style="color:white" >Your are in user  home page</h6>
-<h3 style="color:white">Hello,<?php  echo $_SESSION['username'];?></h3>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-  </div>
-  </div>
-</footer>
+
+    <div id="content">
+    <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<?php echo base_url();?>control/index">PRODUITS</a></li>
+    <li class="breadcrumb-item active" aria-current="page">MODIFIER PRODUITS</li>
+  </ol>
+</nav>
+
+
+    <div class="container" style="margin-top:20px";>
+    
+        <form action="<?php echo base_url();?>control/update_produit/<?php echo $single_produit->id_produit;?>" method="POST">
+           <h1>Modifier Produit</h1>
+        <br />
+        <div class="row">
+            <div class="col-lg-6">
+        <div class="form-group">
+             <label for="reference">Référence :</label><br />
+             <input type="text" name="reference" value="<?php echo $single_produit->reference;?>" placeholder="Entrer Référence produit" class="form-control">
+             <?php echo form_error('reference');?>
+        </div>
+        </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    <label for="nom_produit">Nom_Produit :</label>
+                    <input type="text" name="nom_produit" value="<?php echo $single_produit->nom_produit;?>" class="form-control" placeholder="Entrer désignation"> 
+                    <?php echo form_error('nom_produit');?>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="prix">Prix_Produit :</label>
+                    <input type="text" name="prix" value="<?php echo $single_produit->prix;?>" class="form-control" placeholder="Entrer Prix Produit"> 
+                    <?php echo form_error('prix');?>
+                </div>
+
+                
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="quantite">Quantite_Produit :</label>
+                    <input type="quantite" name="quantite" value="<?php echo $single_produit->quantite;?>" class="form-control" placeholder="Entrer quantite Produit"> 
+                    <?php echo form_error('quantite');?>
+                </div>
+        
+
+
+               
+            </div>
+        </div>
+        
+        <br />
+        <div class="row">
+            <div class="col-lg-6">
+        <div class="form-group">
+        
+           <label  for="category_id">Catégorie :</label>
+           <select class="form-control"  name="category_id" type="text">
+              <?php foreach($details_category as $category) : ?>
+              <option value="<?php  echo $category->id;?>" <?= $category->id == $single_produit->category_id ? "selected" : null?>><?php echo $category->name;?></option>
+              <?php endforeach;?>
+           </select>
+           <?php echo form_error('category_id');?>
+    
+        </div>
+             
+        </div>
+        </div>
+
+        <br />
+        <div class="row">
+        <div class="col-lg-6">
+        <div class="form-group">
+             <label for="nom_fournisseur">fournisseurs :</label><br />
+             <input type="text" name="nom_fournisseur" value="<?php echo $single_produit->fournisseurs;?>" placeholder="Entrer  fournisseur" class="form-control">
+             <?php echo form_error('nom_fournisseur');?>
+        </div>
+        </div>
+        </div>
+        <br />
+     
+        <div class="row">
+            <div class="col-lg-6">
+        <div class="form-group">
+            <button class="btn btn-primary" style="width:100px">Modifier</button>&ensp;&ensp;&ensp;&ensp;
+            <a href="<?php echo base_url().'control/index';?>" class="btn-secondary btn" style="width:100px">Annuler </a>
+            <?php echo form_error('nom_fournisseur');?>
+        </div>
+        </div>
+        </div>
+           
+        </form>
+        </div>
+        </div>
+        </div>
+        </div>
+        </footer>
    <!-- Footer --> 
    <footer class="bg-light text-center text-lg-start">
   <!-- Copyright -->
@@ -351,13 +323,8 @@ body, html {
   </div>
   <!-- Copyright -->
 </footer>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
-
-
-<script src="<?php echo base_url();?>assets/js/bootstrap.bundle.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+         
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -374,18 +341,12 @@ body, html {
           });
       });
       </script>
-         </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"    crossorigin="anonymous"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
-   
-</body>
-</html>
-
 
 </body>
 </html>
-

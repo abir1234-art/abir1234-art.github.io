@@ -127,10 +127,10 @@ form input[type="text"]:hover{
     <form action="" method="POST">
     <h1>Inscription</h1>
     <div class="form-group">
-    <label  for="username">Username:</label>
+    <label  for="username">Nom d'utilisateur:</label>
     <div class = "form-input" > 
      <span class = "icon"><i class = "fa fa-envelope" aria-hidden = "true" > </i> </span >  
-    <input class="form-control" name="username" id="username" type="text" placeholder="Enter your username">
+    <input class="form-control" name="username" id="username" type="text" placeholder="Entrer nom d'utilisateur">
     </div>
     </div>
 
@@ -138,40 +138,40 @@ form input[type="text"]:hover{
     <label  for="email" >Email:</label>
     <div class = "form-input" >
      <span class = "icon"><i class = "fa fa-envelope" aria-hidden = "true" > </i> </span >  
-    <input class="form-control" name="email" id="email" type="email" placeholder="Enter your email">
+    <input class="form-control" name="email" id="email" type="email" placeholder="Entrer votre email">
     </div>
     </div>
 
     <div class="form-group">
-    <label  for="password" >Password:</label>
+    <label  for="password" >Mot de passe:</label>
     <div class = "form-input" > 
      <span class = "icon"><i class = "fa fa-lock" aria-hidden = "true" > </i> </span>
-    <input class="form-control" name="password" id="password" type="password" placeholder="Enter your password">
+    <input class="form-control" name="password" id="password" type="password" placeholder="Entrer votre Mot de passe">
     </div>
     </div>
 
     <div class="form-group">
-    <label  for="password" >Confirm Password:</label>
+    <label  for="password" >Confirmé Mot de passe:</label>
     <div class = "form-input" > 
      <span class = "icon"><i class = "fa fa-lock" aria-hidden = "true" > </i> </span>
-    <input class="form-control" name="password2" id="password2" type="password" placeholder="Enter your confirmation password">
+    <input class="form-control" name="password2" id="password2" type="password" placeholder="Confirmé votre mot de passe">
     </div>
     </div>
 
     <div class="form-group">
-    <label  for="gender" >Gender:</label>
+    <label  for="gender" >Genre:</label>
     <select class="form-control" id="gender" name="gender" type="text">
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
+    <option value="Male">Homme</option>
+    <option value="Female">Femme</option>
     </select>
     <div class="form-group">
     <label  for="phone" >Téléphone:</label>
-    <input class="form-control" name="phone" id="phone" type="number" placeholder="Enter your phone">
+    <input class="form-control" name="phone" id="phone" type="number" placeholder="Entrer votre numéro téléphone">
     </div>
     </br>
     <div class="text-center">
-    <button class="btn btn-primary" name="register">Register</button>
-    <button class="btn btn-primary" name="login">Login</button>
+    <button class="btn btn-primary" name="register">Inscription</button>
+    <button class="btn btn-primary" name="login">Connexion</button>
     </div>
     
 

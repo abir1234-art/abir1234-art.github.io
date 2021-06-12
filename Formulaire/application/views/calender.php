@@ -252,9 +252,27 @@ body, html {
     -ms-transform: rotate(-44deg);
     transform: rotate(-44deg);
 }
+@media (max-width:575px) {
+    .display-4 {
+        font-size: 1.5rem;
+    }
+    .day h5 {
+        background-color: #f8f9fa;
+        padding: 3px 5px 5px;
+        margin: -8px -8px 8px -8px;
+    }
+    .date {
+        padding-left: 4px;
+    }
+}
 
+@media (min-width: 576px) {
+    .day {
+        height: 14.2857vw;
+    }
+}
 
-    </style>
+</style>
   </head>
   <body>
   
@@ -270,16 +288,17 @@ body, html {
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav mr-auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
            <a class="nav-link" id="link" href="<?php echo base_url('auto/login');?>">
               <i class="fas fa-sign-out-alt"></i>
-          Déconnecté<span class="sr-only">(current) </span></a>
+          LogOut<span class="sr-only">(current) </span></a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" id="link" href="<?php echo base_url('sendemail');?>">
-          <i class="fas fa-id-card"></i>Contact</a>
+          <i class="fas fa-id-card"></i>Contact Us</a>
         </li>
       </ul>
     </div>
@@ -287,24 +306,40 @@ body, html {
 <div class="wrapper fixed-left">
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3><i class="fas fa-user"></i>Utilisateur</h3>
+        <h3><i class="fas fa-user"></i>Admin</h3>
       </div>
 
       <ul class="list-unstyled components">
         <li>
-        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home"></i>Accueil</a>
+        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home"></i>HOME</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users"></i>Clients</a>
+              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users"></i>ClIENTS</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
+              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>PRODUITS</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listcommandes"> Vos Commandes</a>
+        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>DEVIS</a>
         </li>
+        <li>
+        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>VENTES</a>
+        </li>
+        <li>
+        <a href="<?php echo base_url();?>auto/listfournisseurs">Fournisseurs</a>
+        </li>
+        <li>
+        <a href="<?php echo base_url();?>auto/listcommandes">Commandes</a>
+        </li>
+        <li>
+        <a href="<?php echo base_url();?>control/liststocks">Stcoks</a>
+        </li>
+
         <li>
           <a href=""><i class="fas fa-clipboard"></i>Dashboard</a>
+        </li>
+        <li>
+          <a href=""><i class="fas fa-user-cog"></i>Settings</a>
         </li>
         <li>
           <a href=""><i class="fas fa-hands-helping"></i>Services</a>
@@ -314,33 +349,73 @@ body, html {
         </li>
       </ul>
     </nav>
-<div class="py-5">
-<div class="container">
-<div class="justify-content-center">
-<div class="col-md-12">
+   
+<div class="container-fluid">
+<style type="text/css">
+	table{
+border: 15px solid #25BAE4;
+border-collapse:collapse;
+margin-top: 50px;
+margin-left: 250px;
+}
+td{
+width: 50px;
+height: 50px;
+text-align: center;
+border: 1px solid #e2e0e0;
+font-size: 18px;
+font-weight: bold;
+}
+th{
+height: 50px;
+padding-bottom: 8px;
+background:#25BAE4;
+font-size: 20px;
+}
+.prev_sign a, .next_sign a{
+color:white;
+text-decoration: none;
+}
+tr.week_name{
+font-size: 16px;
+font-weight:400;
+color:red;
+width: 10px;
+background-color: #efe8e8;
+}
+.highlight{
+background-color:#25BAE4;
+color:white;
+height: 27px;
+padding-top: 13px;
+padding-bottom: 7px;
+}
+.calender .days td
+{
+	width: 80px;
+	height: 80px;
+}
+.calender .hightlight
+{
+	font-weight: 600px;
+}
+.calender .days td:hover
+{
+	background-color: #DEF;
+}
+</style>
+<body>
 
-<div class="Card">
-<div class="Card-header">
-<h5>User Page </h5>
-<?php if(isset($_SESSION['success'])){?>
-       <div class="alert alert-success"><?php echo $_SESSION['success'];?></div>
-    <?php
-    }
-    ?>
-    <br><br>
-    <a href="<?php echo base_url();?>auto/logout">Logout</a>
+<div id="container">
+	<h1>Welcome to CodeIgniter!</h1>
+
+	<div id="body">
+		<?php echo $calender; ?>
+	</div>
+
+	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds. <?php echo  (ENVIRONMENT === 'development') ?  'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '' ?></p>
 </div>
-<div class="Card-body">
-<h6 style="color:white" >Your are in user  home page</h6>
-<h3 style="color:white">Hello,<?php  echo $_SESSION['username'];?></h3>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-  </div>
-  </div>
+
 </footer>
    <!-- Footer --> 
    <footer class="bg-light text-center text-lg-start">
@@ -382,10 +457,6 @@ body, html {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
    
-</body>
-</html>
-
-
 </body>
 </html>
 

@@ -52,9 +52,7 @@
 
     }
   
-    .btn{
-        
-     }
+
     .form-control{
          margin-top: 15px;
          margin-bottom: 15px;
@@ -76,7 +74,11 @@ button.btn{
   width:465px;
   text:20px;
   font-weight: bold;
-  border-radius:13px;
+  border-radius:20px;
+  background-color:#157DEC;
+  margin-top: 15px;
+  
+  
 
 
 }
@@ -168,7 +170,8 @@ a.previous{
 text-decoration: none;
   display: inline-block;
   padding: 8px 16px;
-  margin-top: 10px;
+  margin-top: 20px;
+  background-color:#157DEC;
 
 }
 
@@ -186,9 +189,11 @@ a.previous:hover {
   color:white;
   text:20px;
   font-weight: bold;
-  border-radius:13px;
+  border-radius:20px;
+  background-color:#4169E1;
 
 }
+
 
 
 
@@ -208,33 +213,37 @@ a.previous:hover {
     <?php
     }
     ?>
+
   <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
   <div class="col-lg-4 col-lg-offset-2" style="position: absolute; left: 28% ; top: 15%;">
   <div class="container">
     <div class="col-lg-3 col-lg-offset-2">
     <form action="<?php echo base_url('auto/login')?>" method="POST">
-    <h1>Login Page</h1>
+    <h1>Connexion </h1>
     <div class="form-group">
-    <label  for="username">Username:</label>
+    <label  for="username">Nom d'utilisateur:</label>
     <div class="input-box">
     <div class = "form-input" > 
      <span class = "icon"><i class = "fa fa-user fa-lg fa-fw" aria-hidden = "true" > </i> </span >  
-    <input class="form-control" name="username" id="username" type="text"  placeholder="Enter your username" >
+    <input class="form-control" name="username" id="username" type="text"  placeholder="Entrer Nom d'utilisateur" >
     
   </div>
     </div>
     <div class="form-group">
-    <label  for="password" >Password:</label>
+    <label  for="password" >Mot de passe :</label>
     <div class = "form-input" > 
      <span class = "icon"><i class = "fa fa-lock" aria-hidden = "true"  > </i> </span>
-    <input class="form-control" name="password" id="password" type="password" placeholder="Enter your password"></br>
+    <input class="form-control" name="password" id="password" type="password" placeholder="Entrer votre Mot de passe"></br>
     
     </div>
-    <label><input type="checkbox"  onclick="Afficher()"> Afficher password</label>
-    <span class="psw"><a href="<?php echo base_url('auto/MPO')?>">Mot de passe oublier ??</a></span>
+
+    <label><input type="checkbox"  onclick="Afficher()"> Afficher Mot de passe </label>
+   
+    <a href="<?php echo base_url('auto/MPO')?>" class="pull-right need-help">mot de passe oublier? </a><span class="clearfix"></span>
+   
     <div class="text-center">
-    <button class="btn btn-primary  mb1 bg-blue" name="login">Login</button>
-    <a href="<?php echo base_url('auto/register')?>"class="previous">Register</a>
+    <button class="btn btn-primary" name="login">Connexion</button>
+    <a href="<?php echo base_url('auto/register')?>"class="previous">Inscription</a>
 
     </div>
     
