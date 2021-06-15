@@ -159,7 +159,7 @@ a[data-toggle="collapse"] {
             <li class="nav-item active">
            <a class="nav-link" id="link" href="<?php echo base_url('auto/login');?>">
               <i class="fas fa-sign-out-alt"></i>
-              Déconnecté<span class="sr-only">(current) </span></a>
+          Déconnecté<span class="sr-only">(current) </span></a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" id="link" href="<?php echo base_url('sendemail');?>">
@@ -171,19 +171,21 @@ a[data-toggle="collapse"] {
 <div class="wrapper fixed-left">
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
+      <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
       </div>
 
+      
       <ul class="list-unstyled components">
         <li>
-          <a href="<?php echo base_url('adminpage');?>"><i class="fas fa-home"></i>Accueil</a>
+        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home"></i>Accueil</a>
         </li>
         <li>
               <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users"></i>Clients</a>
         </li>
         <li>
               <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
-              <li>
+        </li>
+        <li>
         <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
         </li>
         <li>
@@ -198,71 +200,84 @@ a[data-toggle="collapse"] {
         <li>
         <a href="<?php echo base_url();?>control/liststocks">Stcoks</a>
         </li>
+
       </ul>
     </nav>
-  
+
 
     <div id="content">
-  
-      <div class="card card-default">
-         <h4 class="card-header">New Devis</h4>
-         <div class="card-body">
-            <form action="<?php echo base_url().'control/create_devis';?>" method="POST">
-                <div class="form-group">
-                   <label for="ref_devis">ref_devis devis</label>
-                    <input type="text" class="form-control"  name="ref_devis" 
-                     placeholder="Enter référence devis">
-                    <?php echo form_error('ref_devis');?>
-                </div>
-                <div class="form-group">
-                   <label for="date_creation">date création</label>
-                    <input type="date" class="form-control" name="date_creation"  placeholder="Enter date création devis ">
-                    <?php echo form_error('date_creation');?>
-                </div>
-                <div class="form-group">
-                   <label for="validite">Durée validité</label>
-                    <input type="numeric" class="form-control" name="validite"  placeholder="Enter validité de devis">
-                    <?php echo form_error('validite');?>
-                </div>
+
+ 
+    <div class="row">
+            <div class="col-md-12">
+             
+              <?php 
+                $success=$this->session->userdata('success');
+                if($success !=""){?>
+                <div class="alert alert-success"><?php echo $success;?></div>
+                <?php } ?>
+                <?php if($this->session->flashdata('error')):?>
+                <div align="center"  style="color:#FFF" class="bg-danger">
+               <?php echo $this->session->flashdata('error');?>
+              </div>
+             <?php endif;?>  
+            </div>
+    </div>
+    
    
-                <div class="form-group">
-                <label  for="id_client">id_client</label>
-                   <select class="form-control"  name="id_client" type="text">
-                    
-                   
-                     <?php foreach($details_clients as $client) : ?> 
-                       <?php if($client->status==1) : ?> 
-                        <option  value="<?php  echo $client->id;?>"><?php echo $client->ref_client;?></option>
-                       <?php endif;?>
-                     <?php endforeach;?>
-                     
-                   </select>
-                   <?php echo form_error('id_client');?>
-                   </div>
+    <div class="text-right">
+       <div class="col-lg-12 text-right">
+       <div class="text-right">
 
-                   <div class="form-group">
-                   <label  for="id_produit">id_produit</label>
-                   <select class="form-control"  name="id_produit" type="text">
-                     <?php foreach($details_produits as $produit) : ?>
-                        <option  value="<?php  echo $produit->id_produit;?>"><?php echo $produit->nom_produit;?></option>
-                     <?php endforeach;?>
-                   </select>
-                   <?php echo form_error('id_produit');?>
-                   </div>
-                  
-
-
+       <div class="clear-fix">
+               <a href="<?php echo base_url().'control/ajouter_fournisseur';?>" class="btn btn-info" style="float:right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Nouvelle fournisseur</a>
         
-                <div class="form-group">
-                    <button class="btn btn-primary" style="width:150px" href="#">Sauvegarder</button>&ensp;&ensp;&ensp;&ensp;
-                    <a href="<?php echo base_url().'control/index2';?>" class="btn-secondary btn" style="width:100px">Annuler &ensp;&ensp;</a>
-                 </div>
-                 <form >
-                 </div>
-                 </div>
-                 </div>
-                 </div>
-                 </footer>
+        </div>
+        
+        </div>
+        
+        </div>
+        <br />
+        <br />
+        <table class="table">
+    <tr>
+      <th scope="col">ref_fournisseur</th>
+      <th scope="col">nom_fournisseur</th>
+      <th scope="col">adresse_fournisseur</th>
+      <th scope="col">tel_forunisseur</th>
+      <th scop="col">Action</th>
+    </tr>
+    <?php $no=1; 
+                         foreach ($fournisseurs as $fournisseur) { ?>
+                   <tr>
+                       <td><?php echo $fournisseur->ref_fournisseur ?></td>
+                       <td><?php echo  $fournisseur->nom_fournisseur ?></td>
+                       <td><?php echo $fournisseur->adresse_fournisseur ?></td>
+                       <td><?php echo  $fournisseur->tel_fournisseur ?></td>
+                        <td>
+                        
+                       
+                             <a href="<?php echo base_url();?>control/edit_fournisseur/<?php echo $fournisseur->ref_fournisseur;?>" class="btn btn-primary" style="width:115px"><i class="fa fa-pencil fa-fw"></i>Modifier</a>
+                             <a href="<?php echo base_url('control/delete_fournisseur/'. $fournisseur->ref_fournisseur);?>" class="btn btn-danger" style="width:100px">Supprimer</a>    
+                        
+                        </td>
+                   </tr>
+                <?php $no++;}?>
+                
+                        
+ 
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+    </footer>
    <!-- Footer --> 
    <footer class="bg-light text-center text-lg-start">
   <!-- Copyright -->
@@ -272,7 +287,56 @@ a[data-toggle="collapse"] {
   </div>
   <!-- Copyright -->
 </footer>
-         
+<?php echo $this->pagination->create_links();?>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form action="<?php echo base_url().'control/ajouter_fournisseur';?>" method="post">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nouvelle Fournisseur</h5>
+        
+      </div>
+<div class="modal-body">
+        <div class="form-group">
+             <label for="ref_fournisseur">ref_fournisseur</label><br />
+             <input type="text" name="ref_fournisseur" placeholder="Entrer référence fournisseur" class="form-control">
+             <?php echo form_error('ref_fournisseur');?>
+        </div>
+        <div class="form-group">
+             <label for="nom_fournisseur">nom_fournisseur</label><br />
+             <input type="text" name="nom_fournisseur" placeholder="Entrer nom fournisseur" class="form-control">
+             <?php echo form_error('nom_fournisseur');?>
+        </div>
+        <br />
+        
+        <div class="form-group">
+             <label for="adresse_fournisseur">adresse_fournisseur</label><br />
+             <input type="text" name="adresse_fournisseur" placeholder="Entrer adresse fournisseur" class="form-control">
+             <?php echo form_error('adresse_fournisseur');?>
+        </div>
+        <br />
+        <div class="form-group">
+             <label for="tel_fournisseur">tel_fournisseur</label><br />
+             <input type="number" name="tel_fournisseur" placeholder="Entrer telephone fournisseur" class="form-control">
+             <?php echo form_error('tel_fournisseur');?>
+        </div>
+        <br />
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <input type="submit" name="insert" value="Ajouter" class="btn btn-info">
+      </div>
+        </form>
+    </div>
+  </div>
+</div>  
+        
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -295,9 +359,5 @@ a[data-toggle="collapse"] {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"    crossorigin="anonymous"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-                
-                
-                
-                
 </body>
 </html>
