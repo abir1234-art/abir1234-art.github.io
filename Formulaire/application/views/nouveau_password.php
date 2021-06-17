@@ -8,7 +8,7 @@
     <title>Récupérer mot de passe </title>
 
     <!-- Bootstrap -->
-    <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url ();?>assets/css/boot/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -16,84 +16,36 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <style>
-    .container{
-         margin-top:50px;
-         repeat: no-repeat;
-         margin-bottom:32px;
-         padding:16px;
-         
-         margin-right: 450px;
-         margin-left: 450px;
-         margin:auto;
-         width:550px;
-         height:750px;
-         max-width: 90%;
-         
-    }
-    .container form{
-      #text-align:center;
-      margin-bottom:24px;
-      color:#222;
-
-    }
-    .container form .form-control{
-      width:100%;
-      height:40px;
-      background:white;
-      border-radius:4px;
-      border:1px solid silver;
-      margin-top: 15px;
-      margin-bottom: 15px;
-
-
-    }
-  
-    .btn{
-        
-     }
-    .form-control{
-         margin-top: 15px;
-         margin-bottom: 15px;
-    }
-
-
-
-    .container form{
-          width:500px;
-          height:450px;
-          padding:20px;
-          background:white;
-          border-radius:4px;
-          box-shadow: 0 8px 16px rgba(0,0,0,.3);
-          background-color:#eee;
-          background: rgba(243,156,18 ,0.8);
-    }
-    .container h1{
-        margin-top: 15px;
-         margin-bottom: 15px;
-    }
-    h1{
-        color:white;
-    }
-    footer{
-      
-      top: 135%;
-      position:absolute;
-      width:100%;
-         
-      height:58px;
-     
-    }
-    </style>
   </head>
 
-  <body background="https://images.unsplash.com/photo-1557683304-673a23048d34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1443&q=80.jpg">
-  
+  <body background="">
 
- 
-    <div class="col-lg-4 col-lg-offset-2" style="position: absolute; left: 30% ; top: 20%;">
-    <div class="container">
+      <nav class="navbar navbar-inverse">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">LJT</a>
+        </div>
+        <!-- Collection of nav links, forms, and other content for toggling -->
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="<?php echo site_url('authentification/Login'); ?>">Connexion</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="<?php echo site_url('authentification/signup'); ?>">Créer un compte</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="col-lg-4 col-lg-offset-2" style="position: absolute; left: 17% ; top: 20%;color: black;background-color: none">
+
      <?php if(isset($_SESSION['success'])){?>
 
         <div class="alert alert-success"><?php echo $_SESSION['success']?></div>
@@ -110,14 +62,13 @@
        
 
 
-    <form action="" method="POST" style="color: white;">
+    <form action="" method="POST" style="">
 
-        <div class="form-group">
+      <div class="form-group">
           <label for="email" >Email :</label>
           <input class="form-control" type="email" name="email" id="email" placeholder="Entrer votre email"><br/>
           
         </div>
-
         <div class="form-group">
           <label for="password" >Nouveau mot de passe :</label>
           <input class="form-control" type="password" name="password" id="password" placeholder="Entrer nouveau mot de passe"><br />
@@ -130,26 +81,19 @@
           
         </div>
 
+
     <div class="text-center">
          
-          <button class="btn btn-primary" name="mpor" >Récupérer mot de passe</button>
+          <button class="btn btn-primary" name="mpor" >Récuprérer mot de passe</button>
     </div>
     </form>
-      </div>
+
    </div>
 
-   <footer class="bg-light text-center text-lg-start">
-     <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2020 Copyright:
-      <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-     </div>
-     <!-- Copyright -->
-     </footer>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="<?php echo base_url();?>assets/js/bootstrap.bundle.js"></script>
+    <script src="<?php echo base_url ();?>assets/css/bootstrap.min.js"></script>
   </body>
 </html>

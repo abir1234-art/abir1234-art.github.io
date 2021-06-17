@@ -1,26 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Page d'inscription</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet">
-    
-    <title>Register Page</title>
+    <!-- Bootstrap -->
+    <link href="<?php echo base_url ();?>assets/css/boot/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
     <style>
-  
-    .container{
-         margin-top:50px;
-
-         margin-bottom:32px;
-         padding:16px;
-         margin-top: 50px;
-         margin-bottom: 150px;
-         margin-right: 450px;
-         margin-left: 400px;
-    }
+      
     div.form-input { 
     margin : 10px auto;
     position : relative;
@@ -34,114 +31,60 @@
     }
 
 
-     span.icon { 
-       position : absolute;
-       left : 10px ;
-       top : 0 ;
-       font-size: 16px ;
-       color : #3366ff ;
-       height : 100% ;
-       display : flex;
-       align-items : center;
-       justify-content : center;
-    }
-    i.fa fa-envelope{
-      position : absolute;
-       left : 10px ;
-       top : 0 ;
-       font-size: 16px ;
-       color : #3366ff ;
-       height : 100% ;
-       display : flex;
-       align-items : center;
-       justify-content : center;
-    }
-    h1{
-      color:blue;
-      display:center;
-    }
-    .container form .form-control{
-      width:100%;
-      height:40px;
-      background:white;
-      border-radius:4px;
-      border:1px solid silver;
-      margin-top: 15px;
-      margin-bottom: 15px;
-
-
-    }
-  .container form h1{
-  text-align:center;
-  margin-bottom:24px;
-  display:center;
-  color:blue;
-
-}
-
-
 .container form{
-  width:500px;
-  height:850px;
   padding:20px;
   background:white;
   border-radius:4px;
   box-shadow: 0 8px 16px rgba(0,0,0,.3);
-  background: rgba(243,156,18 ,0.8);
-}
-label{
-  color:white;
-  font-size:20px;
-}
-    
-form input[type="text"]:focus,
-form input[type="text"]:hover,
-form input[type="text"]:focus,
-form input[type="text"]:hover,
-form input[type="password"]:focus,
-form input[type="password"]:hover 
-form input[type="password"]:focus,
-form input[type="password"]:hover,
-form input[type="text"]:focus,
-form input[type="text"]:hover,
-form input[type="text"]:focus,
-form input[type="text"]:hover{
-    background-color: #ccc;
+  background: rgba(220,220,220,0.2);
+  height:620px;
+  
+  
+  
+  
 }
 
     </style>
   </head>
-  <body background="https://images.unsplash.com/photo-1557683304-673a23048d34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1443&q=80.jpg">
-  <div class="container">
+  <body background="">
+
+
     
-    <div class="col-lg-5 col-lg-offset-2">
-    <?php if(isset($_SESSION['success'])){?>
-       <div class="alert alert-success"><?php echo $_SESSION['success'];?></div>
-    <?php
-    }
-    ?>
+  
+  <div class="container" >
+  <div   class="col-lg-4 col-lg-offset-2" style="color:black;position: absolute; left: 17%;top: 3%">
+    
+    
 
-    <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
-   
-   
-    <form action="" method="POST">
-    <h1>Inscription</h1>
-    <div class="form-group">
-    <label  for="username">Nom d'utilisateur:</label>
-    <div class = "form-input" > 
-     <span class = "icon"><i class = "fa fa-envelope" aria-hidden = "true" > </i> </span >  
-    <input class="form-control" name="username" id="username" type="text" placeholder="Entrer nom d'utilisateur">
-    </div>
-    </div>
+       <center><h1 style="color:#33A5FF">Inscription</h1></center>
 
-    <div class="form-group">
+       </br>
+
+       <?php if(isset($_SESSION['success'])){?>
+
+        <div class="alert alert-success"><?php echo $_SESSION['success']?></div>
+
+      <?php } ?>
+
+
+       <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
+
+       <form action="" method="POST">
+        
+       <div class="form-group">
+        <label  for="username">Nom d'utilisateur:</label>
+         <div class = "form-input" > 
+         <span class = "icon"><i class = "fa fa-envelope" aria-hidden = "true" > </i> </span >  
+         <input class="form-control" name="username" id="username" type="text" placeholder="Entrer nom d'utilisateur">
+        </div>
+        </div>
+        <div class="form-group">
     <label  for="email" >Email:</label>
     <div class = "form-input" >
      <span class = "icon"><i class = "fa fa-envelope" aria-hidden = "true" > </i> </span >  
     <input class="form-control" name="email" id="email" type="email" placeholder="Entrer votre email">
     </div>
     </div>
-
     <div class="form-group">
     <label  for="password" >Mot de passe:</label>
     <div class = "form-input" > 
@@ -157,40 +100,36 @@ form input[type="text"]:hover{
     <input class="form-control" name="password2" id="password2" type="password" placeholder="Confirmé votre mot de passe">
     </div>
     </div>
-
     <div class="form-group">
     <label  for="gender" >Genre:</label>
     <select class="form-control" id="gender" name="gender" type="text">
     <option value="Male">Homme</option>
     <option value="Female">Femme</option>
     </select>
+    <br/>
     <div class="form-group">
     <label  for="phone" >Téléphone:</label>
     <input class="form-control" name="phone" id="phone" type="number" placeholder="Entrer votre numéro téléphone">
     </div>
     </br>
-    <div class="text-center">
-    <button class="btn btn-primary" name="register">Inscription</button>
-    <button class="btn btn-primary" name="login">Connexion</button>
+    <br />
+      
+        <div >
+          <button class="btn btn-primary" name="register" style="position: absolute; left:25%;top:90%;width: 100px;">s'inscrire</button>
+          <a href="<?php echo base_url('auto/login')?>" class="btn btn-primary" style="position: absolute; left: 55%;top:90%;width: 100px;">Connexion</a>
+        </div>
+       </br>
+        
+
+
+        </form>
+
     </div>
-    
-
-
-
     </div>
-    </form>
-  
 
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="<?php echo base_url();?>assets/js/bootstrap.bundle.js"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
-    -->
-    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="<?php echo base_url ();?>assets/css/bootstrap.min.js"></script>
   </body>
 </html>

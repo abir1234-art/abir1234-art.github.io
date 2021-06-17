@@ -1,118 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
-   
-    <!-- Bootstrap CSS -->
-    <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" >
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Page d'inscription</title>
 
-    <title>Register Page</title>
-    <style type="text/css">
-    body{
-      background-repeat: no-repeat;
-      height: 100%;
-      background-position: center;
-      margin-right: 450px;
-      margin-left: 450px;
-      height:520px;
-      width:446px;
-    }
+    <!-- Bootstrap -->
+    <link href="<?php echo base_url ();?>assets/css/boot/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url ();?>assets/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+    
   
-    .container{
-         margin-top:50px;
-         repeat: no-repeat;
-         margin-bottom:32px;
-         padding:16px;
-         
-         margin-right: 450px;
-         margin-left: 450px;
-         margin:auto;
-         width:550px;
-         height:550px;
-         max-width: 90%;
-         
-    }
-    .container form{
-      #text-align:center;
-      margin-bottom:24px;
-      color:#222;
-
-    }
-    .container form .form-control{
-      width:100%;
-      height:40px;
-      background:white;
-      border-radius:4px;
-      border:1px solid silver;
-      margin-top: 15px;
-      margin-bottom: 15px;
-
-
-    }
-  
-
-    .form-control{
-         margin-top: 15px;
-         margin-bottom: 15px;
-    }
-
-
-
-.container form{
-  width:500px;
-  height:500px;
-  padding:20px;
-  background:white;
-  border-radius:4px;
-  box-shadow: 0 8px 16px rgba(0,0,0,.3);
-  background-color:#eee;
-  background: rgba(243,156,18 ,0.8);
-}
-button.btn{
-  width:465px;
-  text:20px;
-  font-weight: bold;
-  border-radius:20px;
-  background-color:#157DEC;
-  margin-top: 15px;
-  
-  
-
-
-}
-form input[type="text"]:focus,
-form input[type="text"]:hover,
-form input[type="password"]:focus,
-form input[type="password"]:hover {
-    background-color: #ccc;
-}
-.container form h1{
-  text-align:center;
-  margin-bottom:24px;
-  display:center;
-  color:blue;
-
-}
-.container form .btn:hover{
-  opacity:.7;
-}
-
-div.form-input { 
-    margin : 10px auto;
-    position : relative;
-    display : flex;
-    align-items : center;
-    justify-content : center;
-}
-
-input.form-control{
-  padding:5px 10px 5px 30px;
-}
-
-
-
+    <title>Hello, world!</title>
+    <style>
+    
 span.icon { 
     position : absolute;
     left : 10px ;
@@ -126,101 +36,38 @@ span.icon {
 }
 
 
-i.fa fa-lock{
-  font-size: 15px 
-}
-label{
-  color:white;
-  font-size:20px;
-}
-.password + .unmask {
-  position:absolute;
-  right: 68px; top: 7px;
-  width: 25px;
-  height: 25px;
-  text-indent: -9999px;
-  background: #aaa;
-  border-radius: 50%;
-}
-.password + .unmask:before {
-  content: "";
-  position:absolute;
-  top:4px; left:4px;
-  z-index:1;
-  width: 17px;
-  height: 17px;
-  background: #e3e3e3;
-  border-radius: 50%;
-}
-.password[type="text"] + .unmask:after {
-  content: "";
-  position:absolute;
-  top:6px; left:6px
-  z-index:2;
-  width: 13px;
-  height: 13px;
-  background: #aaa;
-  border-radius: 50%;
-}
-input.checkbox{
-  left :800px;
-}
 
-a.previous{
-text-decoration: none;
-  display: inline-block;
-  padding: 8px 16px;
-  margin-top: 20px;
-  background-color:#157DEC;
-
-}
-
-a.previous:hover {
-  background-color: #aaa;
-  color:white;
-}
-
-.previous {
-
-  margin-bottom: 10px;
-  background-color:#3366ff;
-  margin-top: 10px;
-  width:465px;
-  color:white;
-  text:20px;
-  font-weight: bold;
-  border-radius:20px;
-  background-color:#4169E1;
-
-}
-
-
-
-
-
-.round {
-  border-radius: 50%;
-}
-
-</style>
-<script>
-
-    </script>
+    </style>
+  
   </head>
-  <body background="https://images.unsplash.com/photo-1557683304-673a23048d34?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1443&q=80.jpg">
-  <?php if(isset($_SESSION['error'])){?>
-       <div class="alert alert-danger"><?php echo $_SESSION['error'];?></div>
-    <?php
-    }
-    ?>
+  <body>
+ 
 
-  <?php echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
-  <div class="col-lg-4 col-lg-offset-2" style="position: absolute; left: 28% ; top: 15%;">
-  <div class="container">
-    <div class="col-lg-3 col-lg-offset-2">
-    <form action="<?php echo base_url('auto/login')?>" method="POST">
-    <h1>Connexion </h1>
-    <div class="form-group">
+
+   <br />
+
+  <div class="col-lg-4 col-lg-offset-2" style="color:black;position: absolute; left: 17%;top: 10%;">
+  <?php if(isset($_SESSION['error'])){?>
+<div class="alert alert-danger"><?php echo $_SESSION['error']?></div>
+<?php } ?>
+</div>
+    
+    <div   class="col-lg-4 col-lg-offset-2" style="color:black;position: absolute; left: 17%;top: 20%;background-color: rgba(220,220,220,0.2);padding: 20px;padding-bottom: 40px;">
+
+      <div class="div-logo">
+    
+      </div>
+
+    
+
+       </br>
+
+       <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
+
+       <form action="" method="POST">
+       <center><img src="https://www.ljtmaroc.com/images/logo.png" style=" height: 200px;width: 240px;margin: auto;left:10px;"></center>
+        <div class="form-group">
+        <div class="form-group">
     <label  for="username">Nom d'utilisateur:</label>
     <div class="input-box">
     <div class = "form-input" > 
@@ -234,53 +81,30 @@ a.previous:hover {
     <div class = "form-input" > 
      <span class = "icon"><i class = "fa fa-lock" aria-hidden = "true"  > </i> </span>
     <input class="form-control" name="password" id="password" type="password" placeholder="Entrer votre Mot de passe"></br>
-    
-    </div>
-
-    <label><input type="checkbox"  onclick="Afficher()"> Afficher Mot de passe </label>
-   
-    <a href="<?php echo base_url('auto/MPO')?>" class="pull-right need-help">mot de passe oublier? </a><span class="clearfix"></span>
-   
-    <div class="text-center">
-    <button class="btn btn-primary" name="login">Connexion</button>
-    <a href="<?php echo base_url('auto/register')?>"class="previous">Inscription</a>
 
     </div>
-    
-    </form>
+        <div class="text-center">
+             <button class="btn btn-primary" name="login" style="float: left;width: 100px;">Connexion</button>
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo base_url('auto/register')?>" class="btn btn-primary" style="position: absolute; left: 30%;top:80%;width: 100px;">Inscription</a>
+        </div>
+        
+        <div class="text-center">
+        
+        </div>
+       
+        <div>
+        <a href="<?php echo base_url('auto/MPO')?>" class="pull-right need-help" >mot de passe oublier? </a><span class="clearfix"></span>
+        </div>
+        
+        </form>
+
     </div>
-</div>
 
-<script>
-function Afficher()
-{ 
-   var input = document.getElementById("password"); 
-    if (input.type === "password")
-    { 
-       input.type = "text"; 
-    } 
-    else
-    { 
-      input.type = "password"; 
-    } 
-} 
-</script>
-<?php
-
-if(isset($_POST['email'],$_POST['password'])){
-  $stmt=$db->prepare('select password from connexion where email=?');
-  $stmt->execute([$_POST['email']]);
-  $hashedpassword=$stmt->fetchColumn();
-  if(password_verify($_POST['password'], $hashedpassword)){
-    echo "connexion reussite";
-  }
-  else{
-    echo "mot de passe incorrect";
-  }
-}
-
-
-?>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="<?php echo base_url ();?>assets/css/bootstrap.min.js"></script>
+  
 
 
 
@@ -288,6 +112,25 @@ if(isset($_POST['email'],$_POST['password'])){
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="<?php echo base_url();?>assets/js/bootstrap.bundle.js"></script>
+   
+   
+    
+    <script src="<?php echo base_url();?>assets/js/jquery-3.6.0.min.js"></script>
+    <script src="<?php echo base_url();?>assets/js/script.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+          $('#sidebarCollapse').on('click', function() {
+            $('#sidebar, #content').toggleClass('active');
+            $('.collapse.in').toggleClass('in');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+            document.getElementById("bodyContent").style.width="100%";
+          });
+      });
+      </script>
+
+
+
+   
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
