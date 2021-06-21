@@ -1,29 +1,3 @@
-<?php
-$str = "FRN000";
-
-
-$query = $this->db->get('fournisseur');
-
-if($query->result()){
-
-foreach ($query->result() as $row) {
-
-  $id_four = $row->ref_fournisseur;
-  $last_four = explode("000", $id_four);
- /* print_r (explode("r",$id_four));*/
- /* echo  $last_four[1];*/
-  $last_four[1]++;
-
-  $id = $str.$last_four[1];
-
-               }
-
-}else{
-  
-    $id = "FRN0001";
-}
-
-?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -38,8 +12,12 @@ foreach ($query->result() as $row) {
     <link rel="stylesheet" type="text/css" href="<?php base_url(); ?>assets/css/bootstrap.css">
 <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <title>Hello, world!</title>
     <style>
+      
+    
+
 
 .blue {
 background:#2abdfc;
@@ -164,7 +142,10 @@ a[data-toggle="collapse"] {
   }
 }
     </style>
+ 
   </head>
+  <body background="">
+
   <body>
   
   <nav class="navbar navbar-expand-lg navbar-light blue fixed-top">
@@ -220,105 +201,146 @@ a[data-toggle="collapse"] {
         <li>
         <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
         </li>
+         
         <li>
         <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
         </li>
         <li>
         <a href="<?php echo base_url();?>control/view_category">Catégories</a>
-        </li>   
+        </li>
         <li>
         <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
         </li>
-      
+       
 
       </ul>
     </nav>
 
-
+    
+  
+       
+  
+    
     <div id="content">
 
- 
+       
+          
+    <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="<?php echo base_url();?>auto/view_utilisateurs">Utilisateurs</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Modifier utilisateur</li>
+  </ol>
+</nav>
+</br>
+
+       <?php if(isset($_SESSION['success'])){?>
+
+        <div class="alert alert-success"><?php echo $_SESSION['success']?></div>
+
+      <?php } ?>  
+    <div class="container" style="margin-top:20px";>
+    
+  <form action="<?php echo base_url().'auto/edit_utilisateur/'.$user['user_id'];?>" method="POST">
+      <h1>Nouveau utilisateur</h1>
     <div class="row">
-            <div class="col-md-12">
-             
-              <?php 
-                $success=$this->session->userdata('success');
-                if($success !=""){?>
-                <div class="alert alert-success"><?php echo $success;?></div>
-                <?php } ?>
-                <?php if($this->session->flashdata('error')):?>
-                <div align="center"  style="color:#FFF" class="bg-danger">
-               <?php echo $this->session->flashdata('error');?>
-              </div>
-             <?php endif;?>  
-            </div>
+    <div class="col-lg-6">
+        
+       <div class="form-group">
+        <label  for="username">Nom d'utilisateur:</label>
+         <div class = "form-input" >  
+         <input class="form-control" name="username" value="<?php echo set_value('username',$user['username']);?>" id="username" type="text" placeholder="Entrer nom d'utilisateur">
+         <?php echo form_error('username');?>
+        </div>
+        </div>
+        </div>
+        </div>
+    <div class="row">
+      <div class="col-lg-6">
+    <div class="form-group">
+    <label  for="email" >Email:</label>
+    <div class = "form-input" > 
+    <input class="form-control" name="email"  value="<?php echo set_value('email',$user['email']);?>"id="email" type="email" placeholder="Entrer votre email">
+    <?php echo form_error('email');?>
+    </div>
+    </div>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-lg-6">
+    <div class="form-group">
+    <label  for="password" >Mot de passe:</label>
+    <div class = "form-input" > 
+    <input class="form-control" name="password" value="<?php echo set_value('password',$user['password']);?>" id="password" type="password" placeholder="Entrer votre Mot de passe">
+    <?php echo form_error('password');?>
+    </div>
+    </div>
+    </div>
     </div>
     
     <div class="row">
-        <div class="text-right">
-          <div class="col-lg-12"><center><h1> Liste Fournisseurs</h1></center></div></div>
-          <br /> 
-</div>    
-<br />
- <hr>
-  <br />
-    <div class="text-right">
-       <div class="col-lg-12 text-right">
-       <div class="text-right">
+    <div class="col-lg-6">
+    <div class="form-group">
+    <label  for="gender" >Genre:</label>
+    <select class="form-control"  id="gender" name="gender" type="text">
+    <?php foreach($details_utilisateur as $utilisateur) : ?>
+                  <option  value="<?php  echo $utilisateur->gender;?>"<?= $utilisateur->gender == $user['gender'] ? "selected" : null?>><?php echo $utilisateur->gender;?></option>
+                <?php endforeach;?>
+    </select>
+    </div>
+    </div>
+    </div>
+    <div class="row">
+     <div class="col-lg-6">
+    <div class="form-group">
+    <label  for="phone" >Téléphone:</label>
+    <input class="form-control" name="phone"  value="<?php echo set_value('phone',$user['phone']);?>" id="phone" type="number" placeholder="Entrer votre numéro téléphone">
+    <?php echo form_error('phone');?>
+    </div>
+    </div>
+    </div>
+    </br>
+    <div class="row">
+     <div class="col-lg-6">
+    <div class="form-group">
+    <label  for="type_user">Type_user :</label>
+                <select class="form-control"   name="type_user" type="text">
+                <?php foreach($type_utilisateur as $type) : ?>
+                  <option  value="<?php  echo $type->type_user;?>"<?= $type->type_user == $user['type_user'] ? "selected" : null?>><?php echo $type->type_user;?></option>
+                <?php endforeach;?>
+                </select>
+                <?php echo form_error('type_user');?>
+                </div>
+    </div>
+    </div>
+    </br>
+    <div class="row">
+     <div class="col-lg-6">
+    <div class="form-group">
+    <label  for="status">Etat :</label>
+                <select class="form-control"   name="status" type="text">
+                <?php foreach($status_utilisateur as $status) : ?>
+                  <option  value="<?php  echo $status->status;?>"<?= $status->status== $user['status'] ? "selected" : null?>><?php echo $status->status;?></option>
+                <?php endforeach;?>
+                </select>
 
-       <div class="clear-fix">
-               <a href="<?php echo base_url().'control/ajouter_fournisseur';?>" class="btn btn-info" style="float:right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Nouvelle fournisseur</a>
-        
+                <?php echo form_error('status');?>
+                </div>
+    </div>
+    </div>
+    </br>
+    
+        <div class="form-group">
+            <button class="btn btn-primary"  name="register" style="width:100px">Modifier</button>&ensp;&ensp;&ensp;&ensp;
+            <a href="<?php echo base_url().'auto/view_utilisateurs';?>" class="btn-secondary btn" style="width:100px">Annuler &ensp;&ensp;</a>
         </div>
-        
-        </div>
-        
-        </div>
-        <br />
-        <br />
-        <br />
-        <div class="table-responsive">
-        <table class="table">
-    <tr>
-      <th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ref_fournisseur</th>
-      <th scope="col">nom_fournisseur</th>
-      <th scope="col">email_fournisseur</th>
-      <th scope="col">adresse_fournisseur</th>
-      <th scope="col">tel_forunisseur</th>
-      <th scop="col">Action</th>
-    </tr>
-    <?php $no=1; 
-                         foreach ($fournisseurs as $fournisseur) { ?>
-                   <tr>
-                       <td><?php echo $fournisseur->ref_fournisseur ?></td>
-                       <td><?php echo  $fournisseur->nom_fournisseur ?></td>
-                       <td><?php echo $fournisseur->email_fournisseur ?></td>
-                       <td><?php echo $fournisseur->adresse_fournisseur ?></td>
-                       <td><?php echo  $fournisseur->tel_fournisseur ?></td>
-                        <td>
-                        
-                       
-                             <a href="<?php echo base_url();?>control/edit_fournisseur/<?php echo $fournisseur->ref_fournisseur;?>" class="btn btn-primary" style="width:115px"><i class="fa fa-pencil fa-fw"></i>Modifier</a>
-                            
-                        
-                        </td>
-                   </tr>
-                <?php $no++;}?>
-                
-                        
- 
-</table>
-</div>
-</div>
-</div>
-</div>
-</div>
 
+           
+        </form>
+   
 
-
-
-
-
+    </div>
+    </div>
+    </div>
+    </div>
     </footer>
    <!-- Footer --> 
    <footer class="bg-light text-center text-lg-start">
@@ -329,59 +351,12 @@ a[data-toggle="collapse"] {
   </div>
   <!-- Copyright -->
 </footer>
-<?php echo $this->pagination->create_links();?>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <form action="<?php echo base_url().'control/ajouter_fournisseur';?>" method="post">
-        <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nouvelle Fournisseur</h5>
-        
-      </div>
-<div class="modal-body">
-        <div class="form-group">
-             <label for="ref_fournisseur">ref_fournisseur</label><br />
-             <input type="text" disabled name="ref_fournisseur"   placeholder="<?php  echo $id ?>" class="form-control">
-             <?php echo form_error('ref_fournisseur');?>
-        </div>
-        <div class="form-group">
-             <label for="nom_fournisseur">nom_fournisseur</label><br />
-             <input type="text" name="nom_fournisseur" placeholder="Entrer nom fournisseur" class="form-control">
-             <?php echo form_error('nom_fournisseur');?>
-        </div>
-        <br />
-        <div class="form-group">
-             <label for="email_fournisseur">email_fournisseur</label><br />
-             <input type="text" name="email_fournisseur" placeholder="Entrer email fournisseur" class="form-control">
-             <?php echo form_error('email_fournisseur');?>
-        </div>
-        <br />
-        
-        <div class="form-group">
-             <label for="adresse_fournisseur">adresse_fournisseur</label><br />
-             <input type="text" name="adresse_fournisseur" placeholder="Entrer adresse fournisseur" class="form-control">
-             <?php echo form_error('adresse_fournisseur');?>
-        </div>
-        <br />
-        <div class="form-group">
-             <label for="tel_fournisseur">tel_fournisseur</label><br />
-             <input type="number" name="tel_fournisseur" placeholder="Entrer telephone fournisseur" class="form-control">
-             <?php echo form_error('tel_fournisseur');?>
-        </div>
-        <br />
-      </div>
-      
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <input type="submit" name="insert" value="Ajouter" class="btn btn-info">
-      </div>
-        </form>
-    </div>
-  </div>
-</div>  
-        
 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="<?php echo base_url ();?>assets/css/bootstrap.min.js"></script>
+    
 <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     
@@ -407,5 +382,6 @@ a[data-toggle="collapse"] {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"    crossorigin="anonymous"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</body>
+
+  </body>
 </html>

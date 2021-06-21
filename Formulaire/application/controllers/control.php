@@ -1,5 +1,15 @@
 <?php
 class control extends CI_Controller{
+    /*public function  get_produit(){
+        $this->load->model('create_model');
+		$new_id = $this->create_model->max_produit()->result();
+		if ($new_id > 0) {
+				foreach ($new_id as $key) {
+		 		 $auto_id = $key->reference;		 		 
+				}
+		}		
+		return $id = $this->create_model->get_id_produit($auto_id,'P');		
+	}*/
 
     public function index(){
            $this->load->helper('url');
@@ -7,8 +17,10 @@ class control extends CI_Controller{
            $this->load->library('pagination');
            $config['base_url']=base_url('control/index');
            $config['per_page']=2;
-           $config['total_rows']=$this->create_model->allrows();
-           
+           $config['reuse_query_string']=TRUE;
+           $config['total_rows']=$this->create_model->allrows();;
+           $config['next_link']='Next';
+           $config['prev_link']='Previous';
            $config['full_tag_open']="<ul class='pagination'>";
            $config['full_tag_close']='</ul>';
            $config['next_tag_open']='<li class="page-item disabled">';
@@ -31,49 +43,29 @@ class control extends CI_Controller{
            #$dt['mahasiswa'] = $data;
            #$dt['category_id'] = $id;
            #$data['mahasiswa']=$this->create_model->getallproduct($config['per_page'],$this->uri->segment(3));
-           $data['mahasiswa']=$this->create_model->getallproduits($config['per_page'],$this->uri->segment(3));
+           $data['mahasiswa']=$this->create_model->getallproduct($config['per_page'],$this->uri->segment(3));
            $data['details_category']=$this->create_model->getallcategory($config['per_page'],$this->uri->segment(3));
-           $data['details_fournisseurs']=$this->create_model->getallfournisseurs($config['per_page'],$this->uri->segment(3));
+           #$data['details_fournisseurs']=$this->create_model->getallfournisseurs($config['per_page'],$this->uri->segment(3));
+           #$data['new_id'] = $this->get_produit();
+           $data['fournisseurs']=$this->create_model->get_fournisseurs($config['per_page'],$this->uri->segment(3));
+           #$data['details_fournisseurs']=$this->create_model->getfournisseurs();
            $this->load->view('listproduit', $data); 
            
        }  
         public function filter($id)
         {
-           $this->load->library('pagination');
-           $config['base_url']=base_url('control/index');
-           $config['per_page']=2;
-           $config['total_rows']=$this->create_model->allrows();
-           
-           $config['full_tag_open']="<ul class='pagination'>";
-           $config['full_tag_close']='</ul>';
-           $config['next_tag_open']='<li class="page-item disabled">';
-           $config['next_tag_close']='</li>';
-           $config['prev_tag_open']='<li class="page-item">';
-           $config['prev_tag_close']='</li>';
-           $config['num_tag_open']='<li class="page-item">';
-           $config['num_tag_close']='</li>';
-           $config['cur_tag_open']='<li class="page-item active"><a class="page-link">';
-           $config['cur_tag_close']='<span class="sr-only">(current)</span></a></li>';
-           $config['attributes']=array('class'=>'page-link');
-           $this->pagination->initialize($config);
-           if ($id == 0) {
-                
-                $data = $this->db->get('produits')->result();
-                #$data=$this->create_model->getallproduits();
-                #$data['mahasiswa'] = $this->create_model->getallproduits()->result();
+          
+            if ($id == 0) {
+               $data = $this->db->get('produits')->result();
             }
-           else
-            {
-               $data = $this->db->get_where('produits', ['category_id'=>$id])->result();
-               #$data=$this->create_model->getallproduits();
-               #$data['mahasiswa'] = $this->create_model->getallproduits()->result();
-               #$data=$this->db->getproduit();
+            else{
+                   $data = $this->db->get_where('produits', ['category_id'=>$id])->result();
             }
-            #$dt['mahasiswa'] = $data;
-            #$dt['category_id'] = $id;
-            #$this->load->view('listproduit', $dt);
-            $this->load->view('listproduit',$data);
-    }
+            $dt['mahasiswa'] = $data;
+            $dt['category_id'] = $id;
+            $this->load->view('result', $dt);
+        }
+       
     
     public function addproduit(){
         $this->load->library('form_validation');
@@ -83,9 +75,8 @@ class control extends CI_Controller{
         $this->form_validation->set_rules('prix','Prix_Produit','trim|required');
         $this->form_validation->set_rules('quantite','Quantite_Produit','trim|required');
         $this->form_validation->set_rules('category_id','category','trim|required');
-        $this->form_validation->set_rules('reference','Référence','trim|required|is_unique[produits.reference]');
         #$this->form_validation->set_rules('ref_fournisseur','fournisseurs','trim|required');
-        $this->form_validation->set_rules('fournisseurs','fournisseurs','trim|required');
+        $this->form_validation->set_rules('nom_fournisseur','nom_fournisseur','trim|required');
 
         if($this->form_validation->run()==FALSE){
             $data_error=[
@@ -96,14 +87,14 @@ class control extends CI_Controller{
         }
         else{
             $result=$this->create_model->insertproduit([
+                'reference'=>$this->create_model->getid_produit(),
                 'nom_produit'=>$this->input->post('nom_produit'),
                 #'nom_produit'=>json_encode(implode(",", $this->input->post('nom_produit'))),
                 'prix'=>$this->input->post('prix'),
                 'quantite'=>$this->input->post('quantite'),
                 'created_date'=>date('y-m-d'),
                 'category_id'=>$this->input->post('category_id'),
-                'reference'=>$this->input->post('reference'),
-                'fournisseurs'=>$this->input->post('fournisseurs')
+                'ref_fournisseur'=>$this->input->post('nom_fournisseur')
             
 
             ]);
@@ -119,9 +110,11 @@ class control extends CI_Controller{
     }
     public function edit_produit($id_produit){
         $this->load->model('create_model');
-        $data['details_category']=$this->create_model->getallcategory();
+        $data['details_category']=$this->create_model->getallcategory1();
         $data['single_produit']=$this->create_model->getsingleproduct($id_produit);
-        $data['single_fournisseurs']=$this->create_model->getallfournisseurs();
+        #$data['single_fournisseurs']=$this->create_model->getallfournisseurs1();
+        $data['fournisseurs']=$this->create_model->get_fournisseurs();
+        #$data['new_id'] = $this->get_produit();
         $this->load->view('editproduit',$data);
 
     }
@@ -129,12 +122,12 @@ class control extends CI_Controller{
         $this->load->library('form_validation');
         $this->load->helper('array');
         $this->load->model('create_model');
-        $this->form_validation->set_rules('reference','Référence','trim|required');
+        #$this->form_validation->set_rules('reference','Référence','trim|required');
         $this->form_validation->set_rules('nom_produit','Nom_Produit','trim|required');
         $this->form_validation->set_rules('prix','Prix_Produit','trim|required');
         $this->form_validation->set_rules('quantite','Quantite_Produit','trim|required');
         $this->form_validation->set_rules('category_id','Catégorie','trim|required');
-        $this->form_validation->set_rules('ref_fournisseur','fournisseurs','trim|required');
+        $this->form_validation->set_rules('nom_fournisseur','nom_fournisseur','trim|required');
         if($this->form_validation->run()==FALSE){
             $data_error=[
                     'error'=>validation_errors()
@@ -148,7 +141,7 @@ class control extends CI_Controller{
                 'quantite'=>$this->input->post('quantite'),
                 'created_date'=>date('y-m-d'),
                 'category_id'=>$this->input->post('category_id'),
-                'ref_fournisseur'=>$this->input->post('ref_fournisseur')
+                'ref_fournisseur'=>$this->input->post('nom_fournisseur')
             ],$id_produit);
             if($result){
                 $this->session->set_flashdata('updated','record has updated successfuly');
@@ -189,23 +182,8 @@ class control extends CI_Controller{
         #$this->mypdf->generate('cetak', $dt, 'laporan-mahasiswa', 'A4', 'portrait');
         $this->mypdf->generate('cetak', $dt,'laporan-mahasiswa', 'A4', 'landscape','potrait');
     }*/
-    /*
-    public function filter(){
-        $filter=$this->input->post('filter');
-        $field=$this->input->post('field');
-        $search=$this->input->post('search');
-
-        if(isset($filter)&& !empty($search)) {
-                $this->load->model('create_model');
-                $data['details_produits'] = $this->create_model->getproduitslike($field,$search);
-                #$data['details_produits'] = $this->create_model->get_product_category($field,$search);
-                #$data['details_produits'] = $this->create_model->get_product_category($field,$search);
-        }else{
-                $this->load->model('create_model');
-                $data['details_produits'] = $this->create_model->getallproduits();
-        }
-        $this->load->view("listproduit",$data);
-    }*/
+    
+  
     public function addcategory(){
         $this->load->library('form_validation');
         $this->load->helper('array');
@@ -214,7 +192,7 @@ class control extends CI_Controller{
        
         if($this->form_validation->run()==FALSE){
         
-            $this->load->view('listcategory');
+            $this->load->view('ajouter_categorie');
             $this->session->set_flashdata('error','The Nom_category field is required');
 
         } 
@@ -225,18 +203,54 @@ class control extends CI_Controller{
                 $formarray['name']= $this->input->post('name');
                 $this->create_model->insertcategory($formarray);
                 $this->session->set_flashdata('inserted','record inserted successfuly');
-                redirect('control/index');
+                redirect('control/view_category');
     
         }
         
     }
     public function view_category(){
         $this->load->model('create_model');
-        $data['details_category']=$this->create_model->getallcategory();
-        $data['details_produits']=$this->create_model->getproduitcategorie();
-        $this->load->view('categoryproduit',$data);
+        $data['details_category']=$this->create_model->getallcategory1();
+        #$data['details_produits']=$this->create_model->getproduitcategorie();
+        $this->load->view('list_category',$data);
 
     }
+
+  
+    public function edit_categorie($category){
+        $this->load->model('create_model');
+        $data=array();
+        $data['user']=$this->create_model->getcategorie($category);
+        $this->form_validation->set_rules('name','Nom Catégorie','required');
+     
+        if($this->form_validation->run() ==  False){
+
+            $this->load->view('editcategorie',$data);
+        }
+       
+        else{
+           //update user record
+           $formarray=array();
+           $formarray['name']=$this->input->post('name');
+           $this->create_model->updatecategorie1($category,$formarray);
+           $this->session->set_flashdata('success','categorie est modifier avec successr ');
+           #redirect('control/modifier');
+           redirect('control/view_category');
+
+        
+        }
+    }
+    public function  get_devis(){
+        $this->load->model('create_model');
+		$new_id = $this->create_model->max_devis()->result();
+		if ($new_id > 0) {
+				foreach ($new_id as $key) {
+		 		 $auto_id = $key->ref_devis;		 		 
+				}
+		}		
+		return $id = $this->create_model->get_id_devis($auto_id,'N');		
+	}
+    
     public function index2($offset=0){
         #$data['devis']=$this->create_model->getalldevis();
         #$this->load->view('devis');
@@ -272,39 +286,34 @@ class control extends CI_Controller{
             $this->load->model('create_model');
             $this->load->helper('array');
             $this->load->library('form_validation');
-            $this->form_validation->set_rules('ref_devis','Numéro devis','required');
+            #$this->form_validation->set_rules('ref_devis','Numéro devis','required');
             $this->form_validation->set_rules('date_creation','date création','required');
             $this->form_validation->set_rules('validite','Durée validité','required');
      
-            $this->form_validation->set_rules('id_client','id_client','required');
-            $this->form_validation->set_rules('id_produit','id_produit','required');
+            $this->form_validation->set_rules('ref_client','nom_client','required');
+            $this->form_validation->set_rules('reference','nom_produit','required');
+            $this->form_validation->set_rules('status1','status1','required');
             #$this->form_validation->set_rules('nom_devis[]','nom_devis','required');
             $this->form_validation->set_error_delimiters("<div class='text-danger'>","</div>");
             if($this->form_validation->run()==FALSE){
                 $data['details_clients']=$this->create_model->getallclients2();
                 $data['details_produits']=$this->create_model->getallproduits2();
+                #$data['new_id'] = $this->get_devis();
                      $this->load->view('devis',$data);
         
             }
             else{  
-                #if($data->status==1){
-                #$this->db->select('c.*,d.*');
-                #$this->db->from('devis as d');
-                #$this->db->join('clients as c ','c.id=d.id_client');
-                #$this->db->select('*');
-                #$this->db->from('clients');
-                #$result = $this->db->get();
-                #$conn= $result->row();
-                #$data['details_clients']=$this->create_model->getallclients2();
-                #if($details_clients->status==1){
+               
                 
 
                     $formarray = array();
-                    $formarray['id_client']= $this->input->post('id_client');
+                    $formarray['ref_client']= $this->input->post('ref_client');
                     $formarray['duree']= $this->input->post('validite');
-                    $formarray['ref_devis']= $this->input->post('ref_devis');
+                    #$formarray['ref_devis']= $this->input->post('ref_devis');
+                    $formarray['ref_devis']=$this->create_model->getid_devis();
                     $formarray['date']= $this->input->post('date_creation');
-                    $formarray['id_produit']= $this->input->post('id_produit');
+                    $formarray['reference']= $this->input->post('reference');
+                    $formarray['status1']= $this->input->post('status1');
                     
                     $this->create_model->insert_devis($formarray);
                     #$formarray['nom_devis']=implode(",",$this->input->post('nom_devis'));
@@ -346,18 +355,6 @@ class control extends CI_Controller{
         
     }
   
-    /*
-    public function view($id){
-        $this->load->model('create_model');
-        $data['posts']=$this->create_model->getsingledevis($id);
-        $this->load->view('afficherdevis',$data);
-        #$post=$this->create_model->getsingledevis($id);
-        #$post1=$this->create_model->getsingleclient();
-        #$this->load->view('afficherdevis',['post'=>$post],['post1'=>$post1]);
-        #$this->load->view('afficherdevis',['post'=>$post]);
-        #$this->load->library('mypdf');
-        #$this->mypdf->generate('afficherdevis',$post,'laporan-mahasiswa', 'A4', 'landscape','potrait');
-    }*/
     public function view($id){
     
       
@@ -385,7 +382,9 @@ class control extends CI_Controller{
 	    $this->load->model('create_model');
 
 	    //send id and status to the model to update the status
-	    if($this->create_model->update_status_devis($ref_devis,$status1)){
+        $this->create_model->update_status_devis($ref_devis,$status1);
+	    #if($this->create_model->update_status_devis($ref_devis,$status1)){
+        if($status1==0){
                 $this->session->set_flashdata('success','le devis à létat envoyé');
                    
         }
@@ -398,23 +397,7 @@ class control extends CI_Controller{
 
     }
 
-    public function requirement()
-    {
-        $this->load->model('create_model');
-        $data['user'] = $this->create_model->getusers();
-        $this->load->view('requirements',$data);
-    
-        $insert = array (
-          'role_name'             => $this->input->post('role_name'),
-          'vacancies'             => $this->input->post('vacancies'),
-          'experience'            => $this->input->post('experience'),
-          'jd'                    => $this->input->post('jd'),
-          'hiring_contact_name'   => $this->input->post('hiring_contact_name'),
-          'hiring_contact_number' => $this->input->post('hiring_contact_number'),
-          'user_id'=> implode(',',$this->input->post('user_id')) //this is my foreign key id from users table);
-        );
-        $this->create_model->add_requirement($insert);
-    }
+  
     
     public function cetak($id)    
     {
@@ -437,9 +420,11 @@ class control extends CI_Controller{
     public function edit_devis1($ref_devis){
         $this->load->model('create_model');
         #$data['details_category']=$this->create_model->getallcategory();
-        $data['details_clients']=$this->create_model->getallclients1();
-        $data['details_produits']=$this->create_model->getallproduits1();
+        $data['details_clients']=$this->create_model->getallclients2();
+        $data['details_produits']=$this->create_model->getallproduits2();
+        $data['details_devis']=$this->create_model->getalldevis1();
         $data['single_devis']=$this->create_model->getsingledevis1($ref_devis);
+        #$data['new_id'] = $this->get_devis();
 
         $this->load->view('modifier_devis',$data);
 
@@ -449,12 +434,13 @@ class control extends CI_Controller{
         $this->load->library('form_validation');
         $this->load->helper('array');
         $this->load->model('create_model');
-        $this->form_validation->set_rules('ref_devis','Numéro devis','required');
+        #$this->form_validation->set_rules('ref_devis','Numéro devis','required');
         $this->form_validation->set_rules('date_creation','date création','required');
         $this->form_validation->set_rules('validite','Durée validité','required');
      
-        $this->form_validation->set_rules('id_client','id_client','required');
-        $this->form_validation->set_rules('id_produit','id_produit','required');
+        $this->form_validation->set_rules('ref_client','nom_client','required');
+        $this->form_validation->set_rules('reference','nom_produit','required');
+        $this->form_validation->set_rules('status1','Etat','required');
         $this->form_validation->set_error_delimiters("<div class='text-danger'>","</div>");
         if($this->form_validation->run()==FALSE){
             $data_error=[
@@ -464,11 +450,12 @@ class control extends CI_Controller{
         }
         else{
             $result=$this->create_model->updatedevis([
-                'ref_devis'=>$this->input->post('ref_devis'),
+                #'ref_devis'=>$this->input->post('ref_devis'),
                 'date'=>$this->input->post('date_creation'),
                 'duree'=>$this->input->post('validite'),
-                'id_client'=>$this->input->post('id_client'),
-                'id_produit'=>$this->input->post('id_produit')
+                'ref_client'=>$this->input->post('ref_client'),
+                'reference'=>$this->input->post('reference'),
+                'status1'=>$this->input->post('status1')
             ],$ref_devis);
             if($result){
                 $this->session->set_flashdata('success','devis est modifer avec success');
@@ -509,8 +496,8 @@ class control extends CI_Controller{
       $dompdf->stream('test.pdf', array("Attachment"=>0));
       $this->db->select('d.*,c.*,p.nom_produit,p.prix,p.quantite,(p.prix*p.quantite) as total_ht,((p.prix*p.quantite)+(p.prix*p.quantite)*0.2) as total_ttc,(p.prix*p.quantite)*0.2 as tva');
       $this->db->from('devis as d');
-      $this->db->join('clients as c','c.id=d.id_client');
-      $this->db->join('produits as p','p.id_produit=d.id_produit');
+      $this->db->join('clients as c','c.ref_client=d.ref_client');
+      $this->db->join('produits as p','p.reference=d.reference');
       $this->db->where('ref_devis',$id);
 	  $data = $this->db->get();
       $conn= $data->row();
@@ -606,10 +593,21 @@ class control extends CI_Controller{
 
      
     }
+    /*public function  get_fournisseur(){
+        $this->load->model('create_model');
+		$new_id = $this->create_model->max_fournisseur()->result();
+		if ($new_id > 0) {
+				foreach ($new_id as $key) {
+		 		 $auto_id = $key->ref_fournisseur;		 		 
+				}
+		}		
+		return $id = $this->create_model->get_id_fournisseur($auto_id,'F');		
+	}*/
     
     public function index5(){
         $this->load->model('create_model');
         $data['fournisseurs']=$this->create_model->get_fournisseurs();
+        #$data['new_id'] = $this->get_fournisseur();
         $this->load->view('listfournisseurs',$data);
 
     }
@@ -617,8 +615,9 @@ class control extends CI_Controller{
         $this->load->library('form_validation');
         $this->load->helper('array');
         $this->load->model('create_model');
-        $this->form_validation->set_rules('ref_fournisseur','ref_fournisseur','trim|required');
+        #$this->form_validation->set_rules('ref_fournisseur','ref_fournisseur','trim|required');
         $this->form_validation->set_rules('nom_fournisseur','nom_fournisseur','trim|required');
+        $this->form_validation->set_rules('email_fournisseur','email_fournisseur','trim|required');
         $this->form_validation->set_rules('adresse_fournisseur','adresse_fournisseur','trim|required');
         $this->form_validation->set_rules('tel_fournisseur','tel_fournisseur','trim|required');
 
@@ -631,8 +630,9 @@ class control extends CI_Controller{
         }
         else{
             $result=$this->create_model->insertfournisseur([
-                'ref_fournisseur'=>$this->input->post('ref_fournisseur'),
+                'ref_fournisseur'=>$this->create_model->getid_fournisseur(),
                 'nom_fournisseur'=>$this->input->post('nom_fournisseur'),
+                'email_fournisseur'=>$this->input->post('email_fournisseur'),
                 'adresse_fournisseur'=>$this->input->post('adresse_fournisseur'),
                 'tel_fournisseur'=>$this->input->post('tel_fournisseur')
 
@@ -659,8 +659,9 @@ class control extends CI_Controller{
         $this->load->library('form_validation');
         $this->load->helper('array');
         $this->load->model('create_model');
-        $this->form_validation->set_rules('ref_fournisseur','ref_fournisseur','trim|required');
+        #$this->form_validation->set_rules('ref_fournisseur','ref_fournisseur','trim|required');
         $this->form_validation->set_rules('nom_fournisseur','nom_fournisseur','trim|required');
+        $this->form_validation->set_rules('email_fournisseur','email_fournisseur','trim|required');
         $this->form_validation->set_rules('adresse_fournisseur','adresse_fournisseur','trim|required');
         $this->form_validation->set_rules('tel_fournisseur','tel_fournisseur','trim|required');
         if($this->form_validation->run()==FALSE){
@@ -671,8 +672,9 @@ class control extends CI_Controller{
         }
         else{
             $result=$this->create_model->update_fournisseur([
-                'ref_fournisseur'=>$this->input->post('ref_fournisseur'),
+                #'ref_fournisseur'=>$this->input->post('ref_fournisseur'),
                 'nom_fournisseur'=>$this->input->post('nom_fournisseur'),
+                'email_fournisseur'=>$this->input->post('email_fournisseur'),
                 'adresse_fournisseur'=>$this->input->post('adresse_fournisseur'),
                 'tel_fournisseur'=>$this->input->post('tel_fournisseur')
                 
@@ -701,11 +703,99 @@ class control extends CI_Controller{
 
 
 
-    }/*
+    }
+ 
+    public function view_commande(){
+        $this->load->model('create_model');
+        $data['commandes']=$this->create_model->getcommandes();
+        $this->load->view('list_commandes',$data);
+        
+    }
+    public function ajouter_commande(){
+        $this->load->library('form_validation');
+        $this->load->helper('array');
+        $this->load->model('create_model');
+        $this->form_validation->set_rules('date_commande','Date_commande','trim|required');
+        $this->form_validation->set_rules('total_commande','Total_commande','trim|required');
+
+        if($this->form_validation->run()==FALSE){
+            $this->load->view('ajouter_commande');
+
+        }
+        else{
+            $result=$this->create_model->insertcommande([
+                'numero_commande'=>$this->create_model->getid_commande(),
+                'date_commande'=>$this->input->post('date_commande'),
+                'total_commande'=>$this->input->post('total_commande')
+
+
+            ]);
+            if($result){
+                $this->session->set_flashdata('success',' commande est ajouter ');
+                redirect('control/view_commande');
+
+            }
+            $this->session->set_flashdata('success',' commande est ajouter ');
+            redirect('control/view_commande');
+           
+
+            
+        }
+
+        
+    }
+    public function modifier_commande($commande){
+        $this->load->model('create_model');
+        $this->load->library('form_validation');
+        $this->load->helper('array');
+        $this->load->model('create_model');
+        $this->form_validation->set_rules('date_commande','Date_commande','trim|required');
+        $this->form_validation->set_rules('total_commande','Total_commande','trim|required');
+        #$data['single_commande']=$this->create_model->getcommande_row($commande);
+        $data=array();
+        $data['user']=$this->create_model->getcommande_row($commande);
+        if($this->form_validation->run() ==  False){
+
+            $this->load->view('modifier_commande',$data);
+        }
+        else{
+            //update user record
+            $formarray=array();
+            #$formarray['numero_commande']=$this->input->post('numero_commande');
+            $formarray['date_commande']=$this->input->post('date_commande');
+            $formarray['total_commande']=$this->input->post('total_commande');
+            $this->create_model->updatcommande($commande,$formarray);
+            $this->session->set_flashdata('success','commande est modifier');
+            redirect(base_url().'control/view_commande');
+
+            
+        }
+        #$this->session->set_flashdata('success','commande est modifier');
+        #redirect(base_url().'control/view_commande');
+
+    }
+
+    
+   
+  
+    /* 
+    function GenerateId() {
+        $query = $this->db->select('id')
+                          ->from('clients1')
+                          ->get();
+        $row = $query->last_row();
+        if($row){
+            $idPostfix = (int)substr($row->id,1)+1;
+            $nextId = 'CL'.STR_PAD((string)$idPostfix,4,"0",STR_PAD_LEFT);
+        }
+        else{$nextId = 'CL1234';} // For the first time
+        return $nextId;
+    }*/
+    /*
         
        
     
-
+ 
     /*
     public function cetakkartu($id) {  
         //set a value for $kode_pasien

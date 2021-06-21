@@ -169,7 +169,7 @@ a[data-toggle="collapse"] {
 <div class="wrapper fixed-left">
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3><i class="fas fa-user"></i>Admin</h3>
+      <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
       </div>
 
       <ul class="list-unstyled components">
@@ -190,21 +190,19 @@ a[data-toggle="collapse"] {
         <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listfournisseurs"><i class="fas fa-user-cog"></i>Fournisseurs</a>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listcommandes">Commandes</a>
+        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/liststocks">Stcoks</a>
+        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
         </li>
+        <li>
+        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
+        </li>
+      
 
-        <li>
-          <a href=""><i class="fas fa-hands-helping"></i>Services</a>
-        </li>
-        <li>
-          <a href=""><i class="fas fa-info"></i>About</a>
-        </li>
       </ul>
     </nav>
 
@@ -215,10 +213,10 @@ a[data-toggle="collapse"] {
       <div class="card card-default">
          <h4 class="card-header">New Devis</h4>
          <div class="card-body">
-            <form action="<?php echo base_url();?>control/edit_devis/<?php echo $single_devis->num_devis;?>" method="POST">
+            <form action="<?php echo base_url();?>control/edit_devis/<?php echo $single_devis->ref_devis;?>" method="POST">
                 <div class="form-group">
-                   <label for="ref_devis">ref_devis devis</label>
-                    <input type="text" class="form-control" value="<?php echo $single_devis->ref_devis;?>"  name="ref_devis" 
+                   <label for="ref_devis">ref_devis</label>
+                    <input type="text" disabled class="form-control"  value="<?php echo $single_devis->ref_devis;?>"  name="ref_devis" 
                      placeholder="Enter référence devis">
                     <?php echo form_error('ref_devis');?>
                 </div>
@@ -234,22 +232,35 @@ a[data-toggle="collapse"] {
                 </div>
    
                 <div class="form-group">
-                <label  for="id_client">id_client</label>
-                   <select class="form-control"    name="id_client" type="text">
+                <label  for="ref_client">nom_client</label>
+                   <select class="form-control"    name="ref_client" type="text">
                      <?php foreach($details_clients as $client) : ?>
-                        <option  value="<?php  echo $client->id;?>" <?= $client->id == $single_devis->id_client ? "selected" : null?>><?php echo $client->ref_client;?></option>
+                        <option  value="<?php  echo $client->ref_client;?>" <?= $client->ref_client == $single_devis->ref_client ? "selected" : null?>><?php echo $client->prenom;?>&nbsp;<?php echo $client->nom;?></option>
                      <?php endforeach;?>
                    </select>
-                   <?php echo form_error('id_client');?>
+                   <?php echo form_error('ref_client');?>
                    </div>
-                   <label  for="id_produit">id_produit</label>
-                   <select class="form-control"  name="id_produit" type="text">
+                 
+                   <label  for="reference">nom_produit</label>
+                   <select class="form-control"  name="reference" type="text">
                      <?php foreach($details_produits as $produit) : ?>
-                        <option  value="<?php  echo $produit->id_produit;?>"  <?= $produit->id_produit == $single_devis->id_produit ? "selected" : null?>><?php echo $produit->reference;?></option>
+                        <option  value="<?php  echo $produit->reference ;?>"  <?= $produit->reference == $single_devis->reference ? "selected" : null?>><?php echo $produit->nom_produit;?></option>
                      <?php endforeach;?>
                    </select>
-                   <?php echo form_error('id_produit');?>
-                   </div>
+                   <?php echo form_error('reference');?>
+                
+                <label  for="status1">Etat :</label>
+                <select class="form-control"  name="status1" type="text">
+                <?php foreach($details_devis as $devis) : ?>
+                  <option  value="<?php  echo $devis->status1;?>"<?= $devis->status1 == $single_devis->status1 ? "selected" : null?>><?php echo $devis->status1;?></option>
+                  <?php endforeach;?>
+                </select>
+                <?php echo form_error('status1');?>
+                   
+            
+              
+        <br />
+                  
                     <div class="form-group">
                         <button class="btn btn-primary" style="width:150px" href="#">Modifier</button>&ensp;&ensp;&ensp;&ensp;
                         <a href="<?php echo base_url().'control/index2';?>" class="btn-secondary btn" style="width:100px">Annuler &ensp;&ensp;</a>

@@ -48,6 +48,7 @@ i { margin: 0 7px; }
 .wrapper {
   display: flex;
   width: 100%;
+  height:100%;
   align-items: stretch;
 }.wrapper {
   display: flex;
@@ -170,7 +171,7 @@ a[data-toggle="collapse"] {
 <div class="wrapper fixed-left">
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3><i class="fas fa-user"></i>Admin</h3>
+        <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
       </div>
 
       <ul class="list-unstyled components">
@@ -190,20 +191,19 @@ a[data-toggle="collapse"] {
         <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listfournisseurs"><i class="fas fa-user-cog"></i>Fournisseurs</a>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
+        </li>
+         
+        <li>
+        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listcommandes">Commandes</a>
+        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/liststocks">Stcoks</a>
+        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
         </li>
-        <li>
-          <a href=""><i class="fas fa-hands-helping"></i>Services</a>
-        </li>
-        <li>
-          <a href=""><i class="fas fa-info"></i>About</a>
-        </li>
+        
       </ul>
     </nav>
 
@@ -218,14 +218,14 @@ a[data-toggle="collapse"] {
 
     <div class="container" style="margin-top:20px";>
     
-        <form action="<?php echo base_url();?>control/update_produit/<?php echo $single_produit->id_produit;?>" method="POST">
+        <form action="<?php echo base_url();?>control/update_produit/<?php echo $single_produit->reference;?>" method="POST">
            <h1>Modifier Produit</h1>
         <br />
         <div class="row">
             <div class="col-lg-6">
         <div class="form-group">
              <label for="reference">Référence :</label><br />
-             <input type="text" name="reference" value="<?php echo $single_produit->reference;?>" placeholder="Entrer Référence produit" class="form-control">
+             <input type="text" disabled name="reference"  value="<?php echo $single_produit->reference;?>"  placeholder="Entrer Référence produit" class="form-control">
              <?php echo form_error('reference');?>
         </div>
         </div>
@@ -288,14 +288,19 @@ a[data-toggle="collapse"] {
 
         <br />
         <div class="row">
-        <div class="col-lg-6">
-        <div class="form-group">
-             <label for="nom_fournisseur">fournisseurs :</label><br />
-             <input type="text" name="nom_fournisseur" value="<?php echo $single_produit->fournisseurs;?>" placeholder="Entrer  fournisseur" class="form-control">
-             <?php echo form_error('nom_fournisseur');?>
+            <div class="col-lg-6">
+            <div class="form-group">
+        <label for="nom_fournisseur">nom_fournisseur :</label>
+        <select class="form-control"  name="nom_fournisseur" type="text">
+        <?php foreach($fournisseurs as $fr) : ?>
+            <option  value="<?php  echo $fr->ref_fournisseur;?>"<?= $fr->ref_fournisseur== $single_produit->ref_fournisseur ? "selected" : null?>><?php echo $fr->nom_fournisseur;?></option>
+            <?php endforeach;?>
+        </select>
+        <?php echo form_error('nom_fournisseur');?>
         </div>
         </div>
         </div>
+     
         <br />
      
         <div class="row">

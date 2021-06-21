@@ -13,45 +13,8 @@
 <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Hello, world!</title>
-    <link rel="stylesheet" type="text/css" href="<?php base_url(); ?>assets/css/bootstrap.css">
-    <style type="text/css">
- body{
-         background-repeat: no-repeat;
-         height: 100%;
-         background-position: center;
-         background-size: cover;
-         background-size: fixed
-       
-    
+    <style>
 
-
-   }
-     .btn{
-         margin-top: 40px;
-         margin-bottom: 150px;
-     }
-     input#file-input{
-       display : none;
-       margin-top: 100px;
-       margin-bottom: 350px;
-       width:800px;
-       height:1000px;
-     }
-     input#file-input + label{
-       background-color:#0066ff;
-       padding:8px;
-       color:#fff;
-       border:2px solid #9ec3ff;
-       border-radius:9px;
-       margin-left:20px;
-    
-     }
-     input#file-input + label:hover{
-       background-color:#3b73ce;
-       border-color:#729fe7;
-       cursor:pointer;
-
-     } 
 .blue {
 background:#2abdfc;
 color: #fff;
@@ -85,6 +48,7 @@ i { margin: 0 7px; }
 .wrapper {
   display: flex;
   width: 100%;
+  height:100%;
   align-items: stretch;
 }.wrapper {
   display: flex;
@@ -173,60 +137,6 @@ a[data-toggle="collapse"] {
     display: none;
   }
 }
-body, html {
-  height:100%;
-}
-
-/*
- * Off Canvas sidebar at medium breakpoint
- * --------------------------------------------------
- */
-@media screen and (max-width: 992px) {
-
-  .row-offcanvas {
-    position: relative;
-    -webkit-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
-  }
-
-  .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -33%;
-  }
-
-  .row-offcanvas-left.active {
-    left: 33%;
-    margin-left: -6px;
-  }
-
-  .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-    width: 33%;
-    height: 100%;
-  }
-}
-
-/*
- * Off Canvas wider at sm breakpoint
- * --------------------------------------------------
- */
-@media screen and (max-width: 34em) {
-  .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -45%;
-  }
-
-  .row-offcanvas-left.active {
-    left: 45%;
-    margin-left: -6px;
-  }
-  
-  .sidebar-offcanvas {
-    width: 45%;
-  }
-}
 
 .card {
     overflow:hidden;
@@ -252,7 +162,6 @@ body, html {
     -ms-transform: rotate(-44deg);
     transform: rotate(-44deg);
 }
-
 
     </style>
   </head>
@@ -288,7 +197,7 @@ body, html {
 <div class="wrapper fixed-left">
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3><i class="fas fa-user"></i>Admin</h3>
+        <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
       </div>
 
       <ul class="list-unstyled components">
@@ -308,25 +217,22 @@ body, html {
         <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listfournisseurs">Fournisseurs</a>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listcommandes">Commandes</a>
+        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/liststocks">Stcoks</a>
+        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
         </li>
         <li>
-          <a href=""><i class="fas fa-user-cog"></i>Settings</a>
+        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
         </li>
-        <li>
-          <a href=""><i class="fas fa-hands-helping"></i>Services</a>
-        </li>
-        <li>
-          <a href=""><i class="fas fa-info"></i>About</a>
-        </li>
+       
       </ul>
     </nav>
+
+
 
     <div id="content">
     <div class="Card-header">
@@ -350,8 +256,10 @@ body, html {
                     <div class="card bg-success text-white h-100">
                         <div class="card-body bg-success">
                             <div class="rotate">
+                            <a href="<?php echo base_url();?>auto/index1">
                                 <i class="fa fa-user fa-4x"></i>
                             </div>
+                            </a>
                             <h6 class="text-uppercase">Clients</h6>
                             <h1 class="display-4"><?= $clients->t ?></h1>
                            
@@ -362,8 +270,10 @@ body, html {
                     <div class="card text-white bg-danger h-100">
                         <div class="card-body bg-danger">
                             <div class="rotate">
+                            <a href="<?php echo base_url();?>control/index">
                             <i class="fa fa-product-hunt fa-4x" aria-hidden="true"></i>
                             </div>
+                            </a>
                             <h6 class="text-uppercase">Produits</h6>
                             <h1 class="display-4"><?= $produits->t ?></h1>
                         </div>
@@ -373,8 +283,10 @@ body, html {
                     <div class="card text-white bg-info h-100">
                         <div class="card-body bg-info">
                             <div class="rotate">
+                            <a href="<?php echo base_url();?>control/index2">
                             <i class="fa fa-file fa-4x" aria-hidden="true" ></i>
                             </div>
+                            </a>
                             <h6 class="text-uppercase">Devis</h6>
                             <h1 class="display-4"><?=$devis->t?></h1>
                         </div>
@@ -387,7 +299,7 @@ body, html {
                                 <i class="fa fa-share fa-4x"></i>
                             </div>
                             <h6 class="text-uppercase">Factures</h6>
-                            <h1 class="display-4">36</h1>
+                            <h1 class="display-4">0</h1>
                         </div>
                     </div>
                 </div>
@@ -416,6 +328,12 @@ body, html {
   </div>
   </div>
   </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  
 </footer>
    <!-- Footer --> 
    <footer class="bg-light text-center text-lg-start">

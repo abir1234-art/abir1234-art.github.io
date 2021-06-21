@@ -48,6 +48,7 @@ i { margin: 0 7px; }
 .wrapper {
   display: flex;
   width: 100%;
+  height:100%;
   align-items: stretch;
 }.wrapper {
   display: flex;
@@ -170,7 +171,7 @@ a[data-toggle="collapse"] {
 <div class="wrapper fixed-left">
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3><i class="fas fa-user"></i>Admin</h3>
+        <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
       </div>
 
       <ul class="list-unstyled components">
@@ -190,20 +191,19 @@ a[data-toggle="collapse"] {
         <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listfournisseurs"><i class="fas fa-user-cog"></i>Fournisseurs</a>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listcommandes">Commandes</a>
+        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/liststocks">Stcoks</a>
+        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
         </li>
         <li>
-          <a href=""><i class="fas fa-hands-helping"></i>Services</a>
+        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
         </li>
-        <li>
-          <a href=""><i class="fas fa-info"></i>About</a>
-        </li>
+      
+        
       </ul>
     </nav>
 
@@ -217,14 +217,14 @@ a[data-toggle="collapse"] {
 
     <div class="container" style="margin-top:20px";>
     
-        <form action="<?php echo base_url().'auto/edit_test/'.$user['id'];?>" method="POST">
+        <form action="<?php echo base_url().'auto/edit_test/'.$user['ref_client'];?>" method="POST">
            <h1> Modifier Client </h1>
            <div class="row">
             <div class="col-lg-6">
 
                 <div class="form-group">
                     <label for="ref_client">Référence_Client :</label>
-                    <input type="text" name="ref_client" value="<?php echo set_value('ref_client',$user['ref_client']);?>" class="form-control" placeholder="Entrer Référence"> 
+                    <input type="text" disabled  name="ref_client" value="<?php echo set_value('ref_client',$user['ref_client']);?>" class="form-control" placeholder="Entrer Référence"> 
                     <?php echo form_error('ref_client');?>
                 </div>
             </div>
@@ -234,7 +234,7 @@ a[data-toggle="collapse"] {
 
                 <div class="form-group">
                     <label for="nom">Nom :</label>
-                    <input type="text" name="nom" value="<?php echo set_value('nom',$user['nom']);?>" class="form-control" placeholder="Entrer Nom client"> 
+                    <input type="text"  name="nom" value="<?php echo set_value('nom',$user['nom']);?>" class="form-control" placeholder="Entrer Nom client"> 
                     <?php echo form_error('nom');?>
                 </div>
             </div>
@@ -287,15 +287,48 @@ a[data-toggle="collapse"] {
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="ville">Ville :</label>
-                    <input type="text" name="ville" value="<?php echo set_value('ville',$user['ville']);?>" class="form-control" placeholder="Entrer ville client"> 
-                    <?php echo form_error('ville');?>
-                </div>
+                <label  for="ville">Ville :</label>
+                <select class="form-control"  name="ville" type="text">
+                <?php foreach($villes as $ville){ ?>
+                    <option value="<?php echo $ville->nom_ville;?>" <?= $ville->nom_ville==$user['nom_ville']  ? "selected" : null?>><?php echo $ville->nom_ville;?></option>
+                    <?php };?>
+                </select>
 
-                
+               </div> 
             </div>
+
+        
         </div>
-        <br />
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                <label  for="gender">Genre:</label>
+                <select class="form-control"  name="gender" type="text">
+                <?php foreach($details_client as $client) : ?>
+                  <option  value="<?php  echo $client->gender;?>"<?= $client->gender == $user['gender'] ? "selected" : null?>><?php echo $client->gender;?></option>
+                <?php endforeach;?>
+                </select>
+                   
+               </div> 
+            </div>
+
+        
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                <label  for="status">Etat :</label>
+                <select class="form-control"  name="status" type="text">
+                <?php foreach($clients as $cl) : ?>
+                  <option  value="<?php  echo $cl->status;?>"<?= $cl->status == $user['status']  ? "selected" : null?>><?php echo $cl->status;?></option>
+                <?php endforeach;?>
+                </select>
+                   
+               </div> 
+            </div>
+
+        
+        </div>
         <div class="form-group">
             <button class="btn btn-primary" style="width:150px">Modifier</button>&ensp;&ensp;&ensp;&ensp;
             <a href="<?php echo base_url().'auto/index1';?>" class="btn-secondary btn" style="width:100px">Annuler &ensp;&ensp;</a>

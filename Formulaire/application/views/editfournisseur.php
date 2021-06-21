@@ -191,13 +191,16 @@ a[data-toggle="collapse"] {
         <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index5"><i class="fas fa-user-cog"></i>Fournisseurs</a>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listcommandes">Commandes</a>
+        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/liststocks">Stcoks</a>
+        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
+        </li>
+        <li>
+        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
         </li>
       </ul>
     </nav>
@@ -220,7 +223,7 @@ a[data-toggle="collapse"] {
             <div class="col-lg-6">
         <div class="form-group">
              <label for="ref_fournisseur">ref_fournisseur :</label><br />
-             <input type="text" name="ref_fournisseur" value="<?php echo $single_fournisseurs->ref_fournisseur;?>" placeholder="Entrer Référence fournisseur" class="form-control">
+             <input type="text" name="ref_fournisseur"  disabled value="<?php echo $single_fournisseurs->ref_fournisseur;?>" placeholder="Entrer Référence fournisseur" class="form-control">
              <?php echo form_error('ref_fournisseur');?>
         </div>
         </div>
@@ -233,6 +236,17 @@ a[data-toggle="collapse"] {
                     <label for="nom_fournisseur">nom_fournisseur :</label>
                     <input type="text" name="nom_fournisseur" value="<?php echo $single_fournisseurs->nom_fournisseur;?>" class="form-control" placeholder="Entrer nom fournisseur"> 
                     <?php echo form_error('nom_fournisseur');?>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    <label for="email_fournisseur">email_fournisseur :</label>
+                    <input type="text" name="email_fournisseur" value="<?php echo $single_fournisseurs->email_fournisseur;?>" class="form-control" placeholder="Entrer email fournisseur"> 
+                    <?php echo form_error('email_fournisseur');?>
                 </div>
             </div>
         </div>

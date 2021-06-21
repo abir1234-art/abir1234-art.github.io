@@ -1,3 +1,29 @@
+<?php
+$str = "NUM000";
+
+
+$query = $this->db->get('devis');
+
+if($query->result()){
+
+foreach ($query->result() as $row) {
+
+  $id_four = $row->ref_devis;
+  $last_four = explode("000", $id_four);
+ /* print_r (explode("r",$id_four));*/
+ /* echo  $last_four[1];*/
+  $last_four[1]++;
+
+  $id = $str.$last_four[1];
+
+               }
+
+}else{
+  
+    $id = "NUM0001";
+}
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -190,14 +216,18 @@ a[data-toggle="collapse"] {
         <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index5"><i class="fas fa-user-cog"></i>Fournisseurs</a>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listcommandes">Commandes</a>
+        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/liststocks">Stcoks</a>
+        <a href="<?php echo base_url();?>control/view_category"><i class="fas fa-user-cog"></i>Catégories</a>
         </li>
+        <li>
+        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
+        </li>
+        
       </ul>
     </nav>
   
@@ -209,8 +239,8 @@ a[data-toggle="collapse"] {
          <div class="card-body">
             <form action="<?php echo base_url().'control/create_devis';?>" method="POST">
                 <div class="form-group">
-                   <label for="ref_devis">ref_devis devis</label>
-                    <input type="text" class="form-control"  name="ref_devis" 
+                   <label for="ref_devis">ref_devis</label>
+                    <input type="text" class="form-control"  disabled name="ref_devis"  placeholder="<?php  echo $id ?>"
                      placeholder="Enter référence devis">
                     <?php echo form_error('ref_devis');?>
                 </div>
@@ -226,29 +256,43 @@ a[data-toggle="collapse"] {
                 </div>
    
                 <div class="form-group">
-                <label  for="id_client">id_client</label>
-                   <select class="form-control"  name="id_client" type="text">
+                <label  for="ref_client">nom_client</label>
+                   <select class="form-control"  name="ref_client" type="text">
                     
                    
                      <?php foreach($details_clients as $client) : ?> 
                        <?php if($client->status==1) : ?> 
-                        <option  value="<?php  echo $client->id;?>"><?php echo $client->ref_client;?></option>
+                        <option  value="<?php  echo $client->ref_client;?>"><?php echo $client->prenom;?>&nbsp;<?php echo $client->nom;?></option>
                        <?php endif;?>
                      <?php endforeach;?>
                      
                    </select>
-                   <?php echo form_error('id_client');?>
+                   <?php echo form_error('ref_client');?>
                    </div>
 
                    <div class="form-group">
-                   <label  for="id_produit">id_produit</label>
-                   <select class="form-control"  name="id_produit" type="text">
+                   <label  for="referen">nom_produit</label>
+                   <select class="form-control"  name="reference" type="text">
                      <?php foreach($details_produits as $produit) : ?>
-                        <option  value="<?php  echo $produit->id_produit;?>"><?php echo $produit->nom_produit;?></option>
+                        <option  value="<?php  echo $produit->reference;?>"><?php echo $produit->nom_produit;?></option>
                      <?php endforeach;?>
                    </select>
-                   <?php echo form_error('id_produit');?>
+                   <?php echo form_error('reference');?>
                    </div>
+                <div class="form-group">
+                <label  for="status1">Etat :</label>
+                <select class="form-control"  name="status1" type="text">
+                    <option value="1">Envoyé</option>
+                    <option value="0">Brouillon</option>
+                </select>
+                   
+                
+               </div> 
+            </div>
+
+        
+        </div>
+        <br />
                   
 
 

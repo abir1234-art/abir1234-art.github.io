@@ -85,7 +85,7 @@ span.icon {
     </div>
         <div class="text-center">
              <button class="btn btn-primary" name="login" style="float: left;width: 100px;">Connexion</button>
-             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo base_url('auto/register')?>" class="btn btn-primary" style="position: absolute; left: 30%;top:80%;width: 100px;">Inscription</a>
+            
         </div>
         
         <div class="text-center">

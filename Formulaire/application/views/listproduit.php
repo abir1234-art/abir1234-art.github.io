@@ -1,3 +1,29 @@
+<?php
+$str = "PRT000";
+
+
+$query = $this->db->get('produits');
+
+if($query->result()){
+
+foreach ($query->result() as $row) {
+
+  $id_four = $row->reference;
+  $last_four = explode("000", $id_four);
+ /* print_r (explode("r",$id_four));*/
+ /* echo  $last_four[1];*/
+  $last_four[1]++;
+
+  $id = $str.$last_four[1];
+
+               }
+
+}else{
+  
+    $id = "PRT0001";
+}
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -52,6 +78,7 @@ i { margin: 0 7px; }
 }.wrapper {
   display: flex;
   width: 100%;
+  height:100%;
   align-items: stretch;
 }#sidebar {
     min-width: 250px;
@@ -170,7 +197,7 @@ a[data-toggle="collapse"] {
 <div class="wrapper fixed-left">
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3><i class="fas fa-user"></i>Admin</h3>
+      <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
       </div>
 
       <ul class="list-unstyled components">
@@ -184,27 +211,25 @@ a[data-toggle="collapse"] {
               <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis</a>
+        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
         </li>
         <li>
         <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listfournisseurs"><i class="fas fa-user-cog"></i>Fournisseurs</a>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listcommandes">Commandes</a>
+        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/liststocks">Stcoks</a>
+        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
         </li>
+        <li>
+        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
+        </li>
+       
 
-        <li>
-          <a href=""><i class="fas fa-hands-helping"></i>Services</a>
-        </li>
-        <li>
-          <a href=""><i class="fas fa-info"></i>About</a>
-        </li>
       </ul>
     </nav>
 
@@ -212,10 +237,9 @@ a[data-toggle="collapse"] {
     <div id="content">
     <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page"> PRODUITS</li>
+    <li class="breadcrumb-item active" aria-current="page"> Produits</li>
   </ol>
 </nav>
-      <div class="container">
        <div class="row">
             <div class="col-md-12">
               <?php 
@@ -232,34 +256,23 @@ a[data-toggle="collapse"] {
     </div>
    
    <br />
-    <div class="row">
+   
      
-           <div class="row">
-              <div class="text-right">
-                <div class="col-lg-12"><center><h1> Listes Produits</h1></center></div></div>
-                <br />
-                <br />
-                
-                
-        
-    </div>    
-    <br />
-
-    
- 
-      
-       <hr>
-        <br />
-        <div class="container">
+   <div class="row">
+        <div class="text-right">
+          <div class="col-lg-12"><center><h1> Liste Produits</h1></center></div></div>
+          <br /> 
+</div>    
+<br />
+ <hr>
+  <br />
+  
           <div class="clear-fix">
-               <a href="<?php echo base_url().'control/addproduit';?>" class="btn btn-info" style="float:right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Nouvelle Produit</a>
+               <a href="<?php echo base_url().'control/addproduit';?>" class="btn btn-info" style="float:right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nouveau Produit</a>
+                </div><br /><br />
                 
-              <a href="<?php echo base_url().'control/addcategory';?>"class="btn btn-info" style="position: absolute; left: 55% ; top:48%;"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Nouvelle Catégorie</a>
-                </div>
-
-            
-<div class="row">
-   <div class="col-md-3">
+              
+        <div class="col-md-2">
     <form action="" id="FormLaporan">
      <select name="" id="angkatan" class="form-control">
       <option value="0">Afficher tous</option>
@@ -268,18 +281,45 @@ a[data-toggle="collapse"] {
       <?php endforeach ?>
      </select>
      <br>
-     <button type="submit" class="btn btn-primary"  style="position: absolute; left: 95% ; top: 3%;">Afficher</button>
+     <button type="submit" class="btn btn-primary"  style="position: absolute; left:93% ; top: 3%;width:50px;"><i class="fa fa-search" aria-hidden="true"></i></button>
     </form>
    </div>
+  
    <div class="col-md-12">
-    <div id="result"></div>
-   </div>
-  </div>
- </div>
+    <div id="table">
+    <div class="table-responsive">
+    <table class="table">
+   
+    <tr style="background-color:#3386FF">
+    <th  scope="col"  style="color:white">Référence</th>
+    <th  scope="col"  style="color:white">Désignation</th>
+    <th  scope="col"  style="color:white">Prix</th>
+                        
+                
+    <th scope="col"  style="color:white">Quantité</th>
+    <th  scope="col"  style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>                       
+    <th scope="col"  style="color:white">&nbsp;&nbsp;Action&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    </tr>
+                   <?php $no=1; 
+                         foreach ($mahasiswa as $row) { ?>
+                   <tr>
+                       <td><?php echo $row->reference; ?></td>
+                       <td><?php echo $row->nom_produit ?></td>
+                       <td><?php echo $row->prix ?></td>
+                       <td>&nbsp;&nbsp;&nbsp;<?php echo $row->quantite ?></td>
+                       <td>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $row->created_date ?>&nbsp;&nbsp;&nbsp;</td>
+                        <td>&nbsp;&nbsp;&nbsp;
+                             <a href="<?php echo base_url();?>control/edit_produit/<?php echo $row->reference;?>" class="btn btn-primary" style="width:115px"><i class="fa fa-pencil fa-fw"></i>Modifier</a>
+                          </td>
+   </tr>
+  <?php $no++; } ?> 
 
-    
-            
-       <?php if($this->session->flashdata('error')):?>
+
+  </table>
+  </div>
+  <?php echo $this->pagination->create_links();?>
+        
+  <?php if($this->session->flashdata('error')):?>
         <div align="center"  style="color:#FFF" class="bg-danger">
         <?php echo $this->session->flashdata('error');?>
         </div>
@@ -302,25 +342,26 @@ a[data-toggle="collapse"] {
         <?php echo $this->session->flashdata('deleted');?>
         </div>
         <?php endif;?> 
-            
-        </div>
+ </div>
+ </div>
 
+ <br  />
 
     
-                   
-        <?php if($this->session->flashdata('error')):?>
-        <div align="center"  style="color:#FFF" class="bg-danger">
-        <?php echo $this->session->flashdata('error');?>
-        </div>
-        <?php endif;?>  
-        
-
+            
+      
+      
         
             
         </div>
         </div>
         </div>
         </div>
+        </div>
+  </div>
+ </div>
+ </div>
+ </div>
         
 
 
@@ -348,25 +389,25 @@ a[data-toggle="collapse"] {
       <div class="modal-body">
         <div class="form-group">
              <label for="reference">Référence</label><br />
-             <input type="text" name="reference" placeholder="Entrer Référence produit" class="form-control">
+             <input type="text"  disabled name="reference"  placeholder="<?php  echo $id ?>" class="form-control">
         </div>
-        <br />
+    
         
         <div class="form-group">
              <label for="nom_produit">Nom_Produit</label><br />
              <input type="text" name="nom_produit" placeholder="Entrer nom produit" class="form-control">
         </div>
-        <br />
+    
         <div class="form-group">
              <label for="prix">Prix_Produit</label><br />
              <input type="text" name="prix" placeholder="Entrer prix produit" class="form-control">
         </div>
-        <br />
+       
         <div class="form-group">
              <label for="quantite">Quantite_Produit</label><br />
              <input type="text" name="quantite" placeholder="Entrer quantite produit" class="form-control">
         </div>
-        <br />
+   
         <div class="form-group">
         
            <label  for="category_id">Catégorie</label>
@@ -375,29 +416,23 @@ a[data-toggle="collapse"] {
               <option  value="<?php  echo $category->id;?>"><?php echo $category->name;?></option>
               <?php endforeach;?>
            </select>
-    
-        </div>
-        <br />
+           </div>
+           
         <div class="form-group">
         
-        <label  for="ref_fournisseur">ref_fournisseurs</label>
-        <select class="form-control"  name="ref_fournisseur" type="text">
-           <?php foreach($details_fournisseurs as $fournisseur) : ?>
-           <option  value="<?php  echo $fournisseur->id_fournisseur;?>"><?php  echo $fournisseur->nom_fournisseur;?></option>
-           <?php endforeach;?>
+        <label for="nom_fournisseur">nom_fournisseur</label><br />
+        <select class="form-control"  name="nom_fournisseur" type="text">
+        <?php foreach($fournisseurs as $fr) : ?>
+            <option  value="<?php  echo $fr->ref_fournisseur;?>"><?php echo $fr->nom_fournisseur;?></option>
+            <?php endforeach;?>
         </select>
-     </div>
-        <br />
-        <div class="form-group">
-             <label for="fournisseurs">fournisseurs</label><br />
-             <input type="text" name="fournisseurs" placeholder="Entrer fournisseur" class="form-control">
         </div>
-        <br />
+       
 
+        </div>
+   
      
-
-
-      </div>
+        
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
         <input type="submit" name="insert" value="Ajouter" class="btn btn-info">
@@ -407,7 +442,7 @@ a[data-toggle="collapse"] {
   </div>
 </div>  
             
-    
+
   
  
   
@@ -444,12 +479,27 @@ a[data-toggle="collapse"] {
     e.preventDefault();
     var id = $("#angkatan").val();
     // console.log(id);
-    var url ="<?php echo base_url('Cetak_Filter/filter/');?>" + id; 
+    var url ="<?php echo base_url('control/filter/');?>" + id; 
     
-    $('#result').load(url);
+    $('#table').load(url);
    })
   });
  </script>
+ <script>  
+      $(document).ready(function(){  
+           $('.stockdelete').click(function(){  
+                var id_produit = $(this).attr("id_produit");  
+                if(confirm("vous voulez supprimer ce produit?"))  
+                {  
+                     window.location="<?php echo base_url();?>control/delete_produit/<?php echo $row->id_produit;?>" ;
+                }  
+                else  
+                {  
+                     return false;  
+                }  
+           });  
+      });  
+      </script>
 
 </body>
 </html>

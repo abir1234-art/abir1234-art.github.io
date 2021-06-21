@@ -1,29 +1,3 @@
-<?php
-$str = "FRN000";
-
-
-$query = $this->db->get('fournisseur');
-
-if($query->result()){
-
-foreach ($query->result() as $row) {
-
-  $id_four = $row->ref_fournisseur;
-  $last_four = explode("000", $id_four);
- /* print_r (explode("r",$id_four));*/
- /* echo  $last_four[1];*/
-  $last_four[1]++;
-
-  $id = $str.$last_four[1];
-
-               }
-
-}else{
-  
-    $id = "FRN0001";
-}
-
-?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -38,6 +12,7 @@ foreach ($query->result() as $row) {
     <link rel="stylesheet" type="text/css" href="<?php base_url(); ?>assets/css/bootstrap.css">
 <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <title>Hello, world!</title>
     <style>
 
@@ -215,9 +190,6 @@ a[data-toggle="collapse"] {
         <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
-        </li>
-        <li>
         <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
         </li>
         <li>
@@ -225,7 +197,7 @@ a[data-toggle="collapse"] {
         </li>
         <li>
         <a href="<?php echo base_url();?>control/view_category">Catégories</a>
-        </li>   
+        </li>
         <li>
         <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
         </li>
@@ -233,84 +205,81 @@ a[data-toggle="collapse"] {
 
       </ul>
     </nav>
-
+    
 
     <div id="content">
-
- 
-    <div class="row">
-            <div class="col-md-12">
-             
-              <?php 
-                $success=$this->session->userdata('success');
-                if($success !=""){?>
-                <div class="alert alert-success"><?php echo $success;?></div>
-                <?php } ?>
-                <?php if($this->session->flashdata('error')):?>
-                <div align="center"  style="color:#FFF" class="bg-danger">
-               <?php echo $this->session->flashdata('error');?>
-              </div>
-             <?php endif;?>  
-            </div>
-    </div>
-    
-    <div class="row">
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page"> Catégories</li>
+  </ol>
+  </nav>
+  <div class="row">
         <div class="text-right">
-          <div class="col-lg-12"><center><h1> Liste Fournisseurs</h1></center></div></div>
+          <div class="col-lg-12"><center><h1> Liste Catégories</h1></center></div></div>
           <br /> 
 </div>    
 <br />
  <hr>
   <br />
+ 
+    <div class="row">
+            <div class="col-md-12">
+              <?php 
+                $success=$this->session->userdata('success');
+                if($success !=""){?>
+                <div class="alert alert-success"><?php echo $success;?></div>
+                <?php } ?>
+                <?php if(isset($_SESSION['error'])){?>
+                 <div class="alert alert-danger"><?php echo $_SESSION['error'];?></div>
+                <?php
+                }
+               ?>
+            </div>
+    </div>
+    
+   
     <div class="text-right">
        <div class="col-lg-12 text-right">
        <div class="text-right">
 
-       <div class="clear-fix">
-               <a href="<?php echo base_url().'control/ajouter_fournisseur';?>" class="btn btn-info" style="float:right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Nouvelle fournisseur</a>
-        
+          <a href="<?php echo base_url().'control/addcategory';?>" class="btn btn-info" ><i class="fa fa-plus" aria-hidden="true"></i>Nouvelle Catégories</a>
+          
         </div>
         
         </div>
         
         </div>
         <br />
-        <br />
-        <br />
-        <div class="table-responsive">
-        <table class="table">
-    <tr>
-      <th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ref_fournisseur</th>
-      <th scope="col">nom_fournisseur</th>
-      <th scope="col">email_fournisseur</th>
-      <th scope="col">adresse_fournisseur</th>
-      <th scope="col">tel_forunisseur</th>
-      <th scop="col">Action</th>
+    <div class="table-responsive">
+    
+    <table class="table">
+    <tr style="background-color:#3386FF">
+      <th scope="col" style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID</th>
+      <th scope="col" style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nom_category</th>
+      <th scop="col" style="color:white">Action</th>
     </tr>
     <?php $no=1; 
-                         foreach ($fournisseurs as $fournisseur) { ?>
+                foreach ($details_category  as $category) { ?>
                    <tr>
-                       <td><?php echo $fournisseur->ref_fournisseur ?></td>
-                       <td><?php echo  $fournisseur->nom_fournisseur ?></td>
-                       <td><?php echo $fournisseur->email_fournisseur ?></td>
-                       <td><?php echo $fournisseur->adresse_fournisseur ?></td>
-                       <td><?php echo  $fournisseur->tel_fournisseur ?></td>
-                        <td>
-                        
-                       
-                             <a href="<?php echo base_url();?>control/edit_fournisseur/<?php echo $fournisseur->ref_fournisseur;?>" class="btn btn-primary" style="width:115px"><i class="fa fa-pencil fa-fw"></i>Modifier</a>
-                            
+                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo  $category->id; ?></td>
+                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $category->name ?></td>
+                       <td>
+                             <a href="<?php echo base_url();?>control/edit_categorie/<?php echo $category->id;?>" class="btn btn-primary" style="width:115px"><i class="fa fa-pencil fa-fw"></i>Modifier</a>
+                             
+                             
+                             
                         
                         </td>
                    </tr>
                 <?php $no++;}?>
-                
-                        
+                    
  
 </table>
 </div>
-</div>
-</div>
+  
+ 
+<br />
+<?php echo $this->pagination->create_links();?>
 </div>
 </div>
 
@@ -329,59 +298,6 @@ a[data-toggle="collapse"] {
   </div>
   <!-- Copyright -->
 </footer>
-<?php echo $this->pagination->create_links();?>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <form action="<?php echo base_url().'control/ajouter_fournisseur';?>" method="post">
-        <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nouvelle Fournisseur</h5>
-        
-      </div>
-<div class="modal-body">
-        <div class="form-group">
-             <label for="ref_fournisseur">ref_fournisseur</label><br />
-             <input type="text" disabled name="ref_fournisseur"   placeholder="<?php  echo $id ?>" class="form-control">
-             <?php echo form_error('ref_fournisseur');?>
-        </div>
-        <div class="form-group">
-             <label for="nom_fournisseur">nom_fournisseur</label><br />
-             <input type="text" name="nom_fournisseur" placeholder="Entrer nom fournisseur" class="form-control">
-             <?php echo form_error('nom_fournisseur');?>
-        </div>
-        <br />
-        <div class="form-group">
-             <label for="email_fournisseur">email_fournisseur</label><br />
-             <input type="text" name="email_fournisseur" placeholder="Entrer email fournisseur" class="form-control">
-             <?php echo form_error('email_fournisseur');?>
-        </div>
-        <br />
-        
-        <div class="form-group">
-             <label for="adresse_fournisseur">adresse_fournisseur</label><br />
-             <input type="text" name="adresse_fournisseur" placeholder="Entrer adresse fournisseur" class="form-control">
-             <?php echo form_error('adresse_fournisseur');?>
-        </div>
-        <br />
-        <div class="form-group">
-             <label for="tel_fournisseur">tel_fournisseur</label><br />
-             <input type="number" name="tel_fournisseur" placeholder="Entrer telephone fournisseur" class="form-control">
-             <?php echo form_error('tel_fournisseur');?>
-        </div>
-        <br />
-      </div>
-      
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        <input type="submit" name="insert" value="Ajouter" class="btn btn-info">
-      </div>
-        </form>
-    </div>
-  </div>
-</div>  
-        
-
 <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     
@@ -407,5 +323,6 @@ a[data-toggle="collapse"] {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"    crossorigin="anonymous"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
 </body>
 </html>

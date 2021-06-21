@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="<?php base_url(); ?>assets/css/bootstrap.css">
 <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <title>Hello, world!</title>
     <style>
 
@@ -48,6 +49,7 @@ i { margin: 0 7px; }
 .wrapper {
   display: flex;
   width: 100%;
+  height:100%;
   align-items: stretch;
 }.wrapper {
   display: flex;
@@ -170,10 +172,10 @@ a[data-toggle="collapse"] {
 <div class="wrapper fixed-left">
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3><i class="fas fa-user"></i>Admin</h3>
+      <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
       </div>
 
-      <ul class="list-unstyled components">
+      
       <ul class="list-unstyled components">
         <li>
         <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home"></i>Accueil</a>
@@ -185,32 +187,43 @@ a[data-toggle="collapse"] {
               <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis</a>
+        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
         </li>
         <li>
         <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listfournisseurs"><i class="fas fa-user-cog"></i>Fournisseurs</a>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listcommandes">Commandes</a>
+        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/liststocks">Stcoks</a>
+        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
         </li>
+        <li>
+        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
+        </li>
+      
 
-        <li>
-          <a href=""><i class="fas fa-hands-helping"></i>Services</a>
-        </li>
-        <li>
-          <a href=""><i class="fas fa-info"></i>About</a>
-        </li>
       </ul>
     </nav>
-
+    
 
     <div id="content">
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page"> Devis client</li>
+  </ol>
+  </nav>
+  <div class="row">
+        <div class="text-right">
+          <div class="col-lg-12"><center><h1> Liste Devis</h1></center></div></div>
+          <br /> 
+</div>    
+<br />
+ <hr>
+  <br />
  
     <div class="row">
             <div class="col-md-12">
@@ -219,6 +232,11 @@ a[data-toggle="collapse"] {
                 if($success !=""){?>
                 <div class="alert alert-success"><?php echo $success;?></div>
                 <?php } ?>
+                <?php if(isset($_SESSION['error'])){?>
+                 <div class="alert alert-danger"><?php echo $_SESSION['error'];?></div>
+                <?php
+                }
+               ?>
             </div>
     </div>
     
@@ -235,20 +253,21 @@ a[data-toggle="collapse"] {
         
         </div>
         <br />
+    <div class="table-responsive">
     <table class="table">
-    <tr>
-      <th scope="col">ref_devis</th>
-      <th scope="col">Date</th>
-      <th scope="col">Durée valable</th>
-      <th scope="col">réf_client</th>
-      <th scop="col">nom</th>
-      <th scop="col">prenom</th>
-      <th scop="col">Désignation</th>
-      <th scop="col">Prix_proposé</th>
-      <th scop="col">Action</th>
+    <tr style="background-color:#3386FF">
+      <th scope="col" style="color:white">ref_devis</th>
+      <th scope="col" style="color:white">Date</th>
+      <th scope="col" style="color:white">Durée valable</th>
+      <th scope="col" style="color:white">réf_client</th>
+      <th scop="col" style="color:white">nom</th>
+      <th scop="col" style="color:white">prenom</th>
+      <th scop="col" style="color:white">Désignation</th>
+      <th scop="col" style="color:white">Prix_proposé</th>
+      <th scop="col" style="color:white">Action</th>
     </tr>
     <?php $no=1; 
-                         foreach ($devis as $dev) { ?>
+                foreach ($devis as $dev) { ?>
                    <tr>
                        <td><?php echo  $dev->ref_devis; ?></td>
                        <td><?php echo $dev->date ?></td>
@@ -263,18 +282,19 @@ a[data-toggle="collapse"] {
                         $status1=$dev->status1;
                            if($status1 == 1){
                              ?>
-                                  <a href="<?php echo base_url();?>control/update_status_devis/<?php echo $dev->num_devis;?>/<?php echo $dev->status1; ?>" class="btn btn-success">Envoyé</a>
+                                  <a href="<?php echo base_url();?>control/update_status_devis/<?php echo $dev->ref_devis;?>/<?php echo $dev->status1; ?>" class="btn btn-success">Envoyé</a>
                              <?php
                               }
                               else{
                                 ?>
-                                   <a href="<?php echo base_url();?>control/update_status_devis/<?php echo $dev->num_devis;?>/<?php echo $dev->status1;?>" class="btn btn-danger">Brouillon</a>
+                                   <a href="<?php echo base_url();?>control/update_status_devis/<?php echo $dev->ref_devis;?>/<?php echo $dev->status1;?>" class="btn btn-danger">Brouillon</a>
                               <?php
                               }
                               ?>     
-                             <a href="<?php echo base_url();?>control/edit_devis1/<?php echo $dev->num_devis;?>" class="btn btn-primary" style="width:100px"><i class="fa fa-pencil fa-fw"></i>Edit</a>
-                             <a href="<?php echo base_url('control/pdfdetails/'. $dev->num_devis);?>" class="btn btn-info" style="width:100px">View in PDF</a>
-                             <a href="<?php echo base_url('control/delete_devis/'. $dev->num_devis);?>" class="btn btn-danger" style="width:100px">Supprimer</a>    
+                             <a href="<?php echo base_url();?>control/edit_devis1/<?php echo $dev->ref_devis;?>" class="btn btn-primary" style="width:100px"><i class="fa fa-pencil fa-fw"></i>Edit</a>
+                             <a href="<?php echo base_url('control/pdfdetails/'. $dev->ref_devis);?>" class="btn btn-info" style="width:100px">View in PDF</a>
+                             
+                             
                         
                         </td>
                    </tr>
@@ -283,6 +303,7 @@ a[data-toggle="collapse"] {
                         
  
 </table>
+</div>
 <br />
 <?php echo $this->pagination->create_links();?>
 </div>
@@ -328,5 +349,6 @@ a[data-toggle="collapse"] {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"    crossorigin="anonymous"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
 </body>
 </html>
