@@ -1,3 +1,32 @@
+<?php
+$str = "DEV000";
+
+
+$query = $this->db->get('devis');
+
+if($query->result()){
+
+foreach ($query->result() as $row) {
+
+  $id_four = $row->ref_devis;
+  $last_four = explode("000", $id_four);
+ /* print_r (explode("r",$id_four));*/
+ /* echo  $last_four[1];*/
+  $last_four[1]++;
+
+  $id = $str.$last_four[1];
+
+               }
+
+}else{
+  
+    $id = "DEV0001";
+}
+
+
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,7 +41,6 @@
     <link rel="stylesheet" type="text/css" href="<?php base_url(); ?>assets/css/bootstrap.css">
 <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <title>Hello, world!</title>
     <style>
 
@@ -160,7 +188,7 @@ a[data-toggle="collapse"] {
             <li class="nav-item active">
            <a class="nav-link" id="link" href="<?php echo base_url('auto/login');?>">
               <i class="fas fa-sign-out-alt"></i>
-          Déconnecté<span class="sr-only">(current) </span></a>
+              Déconnecté<span class="sr-only">(current) </span></a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" id="link" href="<?php echo base_url('sendemail');?>">
@@ -172,10 +200,9 @@ a[data-toggle="collapse"] {
 <div class="wrapper fixed-left">
     <nav id="sidebar">
       <div class="sidebar-header">
-      <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
+        <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
       </div>
 
-      
       <ul class="list-unstyled components">
         <li>
         <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home" style="color:black" ></i>Accueil</a>
@@ -187,7 +214,7 @@ a[data-toggle="collapse"] {
               <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt" style="color:black" ></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
+        <a href="<?php echo base_url();?>control/view_devis"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
         </li>
         <li>
         <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog" style="color:black"></i>Utilisateurs</a>
@@ -208,102 +235,108 @@ a[data-toggle="collapse"] {
        
       </ul>
     </nav>
-    
+  
 
     <div id="content">
-    <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page"> Catégories</li>
-  </ol>
-  </nav>
-  <div class="row">
-        <div class="text-right">
-          <div class="col-lg-12"><center><h1> Liste Catégories</h1></center></div></div>
-          <br /> 
-</div>    
-<br />
- <hr>
-  <br />
- 
-    <div class="row">
-            <div class="col-md-12">
-              <?php 
-                $success=$this->session->userdata('success');
-                if($success !=""){?>
-                <div class="alert alert-success"><?php echo $success;?></div>
-                <?php } ?>
-                <?php if(isset($_SESSION['error'])){?>
-                 <div class="alert alert-danger"><?php echo $_SESSION['error'];?></div>
-                <?php
-                }
-               ?>
-            </div>
-    </div>
-    
-   
-    <div class="text-right">
-       <div class="col-lg-12 text-right">
-       <div class="text-right">
-
-          <a href="<?php echo base_url().'control/addcategory';?>" class="btn btn-info" ><i class="fa fa-plus" aria-hidden="true"></i>Nouvelle Catégories</a>
-          
-        </div>
-        
-        </div>
-        
-        </div>
-        <br />
-    <div class="table-responsive">
-    
-    <table class="table">
-    <tr style="background-color:#3386FF">
-      <th scope="col" style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID</th>
-      <th scope="col" style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nom_category</th>
-      <th scop="col" style="color:white">Action</th>
-    </tr>
-    <?php $no=1; 
-                foreach ($details_category  as $category) { ?>
-                   <tr>
-                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo  $category->id; ?></td>
-                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $category->name ?></td>
-                       <td>
-                             <a href="<?php echo base_url();?>control/edit_categorie/<?php echo $category->id;?>" class="btn btn-primary" style="width:115px"><i class="fa fa-pencil fa-fw"></i>Modifier</a>
-                             
-                             
-                             
-                        
-                        </td>
-                   </tr>
-                <?php $no++;}?>
+  
+      <div class="card card-default">
+         <h4 class="card-header">Nouvelle Devis</h4>
+         <div class="card-body">
+         <form action="<?php echo base_url().'control/create_devis_test';?>" methode="post">
+            <div class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="col-md-3">    
+            <div class="form-group">
+                   <label for="ref_devis">N° Devis</label>
+                    <input type="text" class="form-control"  disabled name="ref_devis"  placeholder="<?php  echo $id ?>"
+                     placeholder="Enter référence devis">
+                    <?php echo form_error('ref_devis');?>
+                </div>
+               </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <div class="col-md-3">  
+               <div class="form-group">
+                <label  for="ref_client">Nom client</label>
+                   <select class="form-control"  name="ref_client" type="text">
                     
- 
-</table>
-</div>
+                   
+                     <?php foreach($details_clients as $client) : ?> 
+                       <?php if($client->status==1) : ?> 
+                        <option  value="<?php  echo $client->ref_client;?>"><?php echo $client->prenom;?>&nbsp;<?php echo $client->nom;?></option>
+                       <?php endif;?>
+                     <?php endforeach;?>
+                     
+                   </select>
+                   <?php echo form_error('ref_client');?>
+                   </div>
+                       </div>
+                       </div>
+                       <br />
+                       <div class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <div class="col-md-3">
+                <div class="form-group">
+                   <label for="date_creation">date création</label>
+                    <input type="date" class="form-control" name="date_creation"  placeholder="Enter date création devis ">
+                    <?php echo form_error('date_creation');?>
+                </div>
+               </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <div class="col-md-3">
+                <div class="form-group">
+                   <label for="validite">Durée validité</label>
+                    <input type="numeric" class="form-control" name="validite"  placeholder="Enter validité de devis">
+                    <?php echo form_error('validite');?>
+                </div>
+                </div>
+                       </div>
+   
+                 <br />
+                 <div class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   <div class="col-md-3">
+                   <div class="form-group">
+                <label  for="status1">Etat Devis :</label>
+                <select class="form-control"  name="status1" type="text">
+                    <option selected="selected" value="Brouillon">Brouillon</option>
+                    <option value="Enregistré">Enregistré</option>
+                    <option value="Validé">Validé</option>
+                    <option value="Envoyé">Envoyé</option>
+                </select>
+                   
+                
+               </div> 
+               </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <div class="col-md-3">
+               <div class="form-group">
+            <label for="message">Message</label>
+            <textarea class="form-control" name="message" id="message" row="16" placeholder="Entrer message...."></textarea>
+                    <?php echo form_error('message');?>
+                </div>
+                      
+                    
+                <div class="form-group">
+                   <label for="total_ht1">Total HT</label>
+                    <input type="text" class="form-control" name="total_ht1" id="total_ht1" placeholder="" value="0" >
+                    <?php echo form_error('total_ht');?><br />
+                    <label for="total_tva">Total TVA</label>
+                    <input type="text" class="form-control" name="total_tva"  id="total_tva" placeholder="" value="0">
+                    <?php echo form_error('total_tva');?><br />
+                    <label for="total_ttc" >Total TTC</label>
+                    <input type="text" class="form-control"  id="total_ttc" name="total_ttc"  placeholder="" value="0">
+                    <?php echo form_error('total_ttc');?>
+                </div>
+               
+                </div>
+        
+                       
+                  
+                <br/>
+                <div class="form-group">
+                &ensp;&ensp;&ensp;&ensp;
+            <a href="<?php echo base_url().'control/view_devis';?>"  style="float:right;width:150px"class="btn-secondary btn" style="width:100px">Annuler </a>
+            &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;<button class="btn btn-primary" style="float:right;width:150px" href="#">Valider</button>         
+          </div>
+          <br />
+          <div id="tableau_devis"></div>
+     
   
- 
-<br />
-<?php echo $this->pagination->create_links();?>
-</div>
-</div>
-
-
-
-
-
-
-    </footer>
-   <!-- Footer --> 
-   <footer class="bg-light text-center text-lg-start">
-  <!-- Copyright -->
-  <div class="text-center p-3" style="background-color:#6a76f8">
-    © 2020 Copyright
-  
-  </div>
-  <!-- Copyright -->
-</footer>
-<!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    
+         
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -326,6 +359,34 @@ a[data-toggle="collapse"] {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"    crossorigin="anonymous"></script>
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  
+    <script>
+     //  document.getElementById("total_ht").value=getValue();
+     //function getValue() {
+    // Sélectionner l'élément input et récupérer sa valeur
+     //var input = document.getElementById("prix_propose").value *  document.getElementById("quantite_produit").value; 
+      
+      //return var;
+    // Afficher la valeur
+    //alert(input);
+   // var prix_propose = document.getElementById("Poids").value;
+    //var quantite_produit = document.getElementById("Taille").value;
+    //var result = prix_propose*quantite_produit;
+    //var IMC = result.toFixed(2);
+     // </script>
+     
+     
+         <script type="text/javascript">
+          $('form').change1(function(){
+            var total_ht1 = $('#total_ht1').val();
+            var total_tva = $('#total_tva').val();
+            if(total_ht1.length > 0 && total_tva.length > 0){
+            //$('#total_tva').val(total_tva*0.2);
+            $('#total_ttc').val(total_ht1 + total_tva);
+         }
+        })
+        </script>        
+                
+                
+                
 </body>
 </html>

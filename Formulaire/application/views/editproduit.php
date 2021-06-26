@@ -176,42 +176,41 @@ a[data-toggle="collapse"] {
 
       <ul class="list-unstyled components">
         <li>
-        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home"></i>Accueil</a>
+        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home" style="color:black" ></i>Accueil</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users"></i>Clients</a>
+              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users" style="color:black" ></i>Clients</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
+              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt" style="color:black" ></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
+        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog" style="color:black"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
-        </li>
-         
-        <li>
-        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
+        <a href="<?php echo base_url();?>control/view_commande"><i class="fab fa-cuttlefish" style="color:black"></i>Commandes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
+        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart " aria-hidden="true" style="color:black" ></i>Stock</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
+        <a href="<?php echo base_url();?>control/index5"><img src="https://img.icons8.com/ios/50/000000/supplier.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Fournisseurs</a>
         </li>
-        
+        <li>
+        <a href="<?php echo base_url();?>control/view_category"><img src="https://img.icons8.com/ios/50/000000/category.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Catégories</a>
+        </li>
+ 
       </ul>
     </nav>
 
 
     <div id="content">
     <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="<?php echo base_url();?>control/index">PRODUITS</a></li>
-    <li class="breadcrumb-item active" aria-current="page">MODIFIER PRODUITS</li>
+    <li class="breadcrumb-item"><a href="<?php echo base_url();?>control/index">Produits</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Modifier Produit&nbsp;/&nbsp;Service</li>
   </ol>
 </nav>
 
@@ -219,7 +218,7 @@ a[data-toggle="collapse"] {
     <div class="container" style="margin-top:20px";>
     
         <form action="<?php echo base_url();?>control/update_produit/<?php echo $single_produit->reference;?>" method="POST">
-           <h1>Modifier Produit</h1>
+           <h1>Modifier Produit&nbsp;/&nbsp;Service</h1>
         <br />
         <div class="row">
             <div class="col-lg-6">
@@ -235,7 +234,7 @@ a[data-toggle="collapse"] {
             <div class="col-lg-6">
 
                 <div class="form-group">
-                    <label for="nom_produit">Nom_Produit :</label>
+                    <label for="nom_produit">Désignation :</label>
                     <input type="text" name="nom_produit" value="<?php echo $single_produit->nom_produit;?>" class="form-control" placeholder="Entrer désignation"> 
                     <?php echo form_error('nom_produit');?>
                 </div>
@@ -245,7 +244,7 @@ a[data-toggle="collapse"] {
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="prix">Prix_Produit :</label>
+                    <label for="prix">Prix Produit :</label>
                     <input type="text" name="prix" value="<?php echo $single_produit->prix;?>" class="form-control" placeholder="Entrer Prix Produit"> 
                     <?php echo form_error('prix');?>
                 </div>
@@ -257,7 +256,7 @@ a[data-toggle="collapse"] {
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="quantite">Quantite_Produit :</label>
+                    <label for="quantite">Quantite Produit :</label>
                     <input type="quantite" name="quantite" value="<?php echo $single_produit->quantite;?>" class="form-control" placeholder="Entrer quantite Produit"> 
                     <?php echo form_error('quantite');?>
                 </div>
@@ -273,7 +272,7 @@ a[data-toggle="collapse"] {
             <div class="col-lg-6">
         <div class="form-group">
         
-           <label  for="category_id">Catégorie :</label>
+           <label  for="category_id">Catégorie Produit:</label>
            <select class="form-control"  name="category_id" type="text">
               <?php foreach($details_category as $category) : ?>
               <option value="<?php  echo $category->id;?>" <?= $category->id == $single_produit->category_id ? "selected" : null?>><?php echo $category->name;?></option>
@@ -290,7 +289,7 @@ a[data-toggle="collapse"] {
         <div class="row">
             <div class="col-lg-6">
             <div class="form-group">
-        <label for="nom_fournisseur">nom_fournisseur :</label>
+        <label for="nom_fournisseur">Nom fournisseur :</label>
         <select class="form-control"  name="nom_fournisseur" type="text">
         <?php foreach($fournisseurs as $fr) : ?>
             <option  value="<?php  echo $fr->ref_fournisseur;?>"<?= $fr->ref_fournisseur== $single_produit->ref_fournisseur ? "selected" : null?>><?php echo $fr->nom_fournisseur;?></option>

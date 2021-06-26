@@ -177,34 +177,34 @@ a[data-toggle="collapse"] {
 
       <ul class="list-unstyled components">
         <li>
-        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home"></i>Accueil</a>
+        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home" style="color:black" ></i>Accueil</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users"></i>Clients</a>
+              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users" style="color:black" ></i>Clients</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
+              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt" style="color:black" ></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
+        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog" style="color:black"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
+        <a href="<?php echo base_url();?>control/view_commande"><i class="fab fa-cuttlefish" style="color:black"></i>Commandes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
+        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart " aria-hidden="true" style="color:black" ></i>Stock</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
+        <a href="<?php echo base_url();?>control/index5"><img src="https://img.icons8.com/ios/50/000000/supplier.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
+        <a href="<?php echo base_url();?>control/view_category"><img src="https://img.icons8.com/ios/50/000000/category.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Catégories</a>
         </li>
+      
        
-        
       </ul>
     </nav>
 
@@ -225,7 +225,7 @@ a[data-toggle="collapse"] {
             <div class="col-lg-6">
 
                 <div class="form-group">
-                    <label for="numero_commande">Numéro_commande :</label>
+                    <label for="numero_commande">Numéro commande :</label>
                     <input type="text" disabled name="numero_commande"   class="form-control" value="<?php echo set_value('numero_commande',$user['numero_commande']);?>"> 
                     <?php echo form_error('numero_commande');?>
                 </div>
@@ -235,7 +235,7 @@ a[data-toggle="collapse"] {
             <div class="col-lg-6">
 
                 <div class="form-group">
-                    <label for="date_commande">Date_commande :</label>
+                    <label for="date_commande">Date commande :</label>
                     <input type="date" name="date_commande" value="<?php echo set_value('date_commande',$user['date_commande']);?>" class="form-control" placeholder="Entrer Date_commande"> 
                     <?php echo form_error('date_commande');?>
                 </div>
@@ -245,8 +245,8 @@ a[data-toggle="collapse"] {
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="total_commande">Total_commande:</label>
-                    <input type="numeric" name="total_commande" value="<?php echo set_value('total_commande',$user['total_commande']);?>" class="form-control" placeholder="Entrer Total_commande"> 
+                    <label for="total_commande">Total commande:</label>
+                    <input type="number" name="total_commande" value="<?php echo set_value('total_commande',$user['total_commande']);?>" class="form-control" placeholder="Entrer Total_commande"> 
                     <?php echo form_error('total_commande');?>
                 </div>
 

@@ -199,44 +199,45 @@ a[data-toggle="collapse"] {
       <div class="sidebar-header">
         <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
       </div>
-
       <ul class="list-unstyled components">
         <li>
-        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home"></i>Accueil</a>
+        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home" style="color:black" ></i>Accueil</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users"></i>Clients</a>
+              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users" style="color:black" ></i>Clients</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
+              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt" style="color:black" ></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
+        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
+        </li>
+     
+        <li>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog" style="color:black"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
+        <a href="<?php echo base_url();?>control/view_commande"><i class="fab fa-cuttlefish" style="color:black"></i>Commandes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
+        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart " aria-hidden="true" style="color:black" ></i>Stock</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
+        <a href="<?php echo base_url();?>control/index5"><img src="https://img.icons8.com/ios/50/000000/supplier.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
+        <a href="<?php echo base_url();?>control/view_category"><img src="https://img.icons8.com/ios/50/000000/category.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Catégories</a>
         </li>
-        <li>
-        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
-        </li>
-       
         
+       
       </ul>
+      
     </nav>
 
     <div id="content">
     <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="<?php echo base_url();?>auto/index1">CLIENTS</a></li>
-    <li class="breadcrumb-item active" aria-current="page">AJOUTER NOUVELLE CLIENT</li>
+    <li class="breadcrumb-item"><a href="<?php echo base_url();?>auto/index1">Clients</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Ajouter nouveau client</li>
   </ol>
 </nav>
 
@@ -249,7 +250,7 @@ a[data-toggle="collapse"] {
             <div class="col-lg-6">
 
                 <div class="form-group">
-                    <label for="ref_client">Référence_Client :</label>
+                    <label for="ref_client">Référence Client :</label>
                     <input type="text" disabled name="ref_client"   class="form-control" placeholder="<?php  echo $id ?>"> 
                     <?php echo form_error('ref_client');?>
                 </div>
@@ -291,6 +292,15 @@ a[data-toggle="collapse"] {
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
+                    <label for="ice">ICE:</label>
+                    <input type="text" name="ice" value="<?php echo set_value('ice');?>" class="form-control" placeholder="Entrer ICE client"> 
+                    <?php echo form_error('ice');?>
+                </div>                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
                     <label for="telephone">Téléphone :</label>
                     <input type="number" name="telephone" value="<?php echo set_value('telephone');?>" class="form-control" placeholder="Entrer telephone client"> 
                     <?php echo form_error('telephone');?>
@@ -313,7 +323,7 @@ a[data-toggle="collapse"] {
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                <label  for="ville">Ville</label>
+                <label  for="ville">Ville :</label>
                 <select class="form-control"  name="ville" type="text">
                     <option value="Agadir">Agadir</option>
                     <option value="Beni Mellal">Beni Mellal</option>
@@ -342,11 +352,11 @@ a[data-toggle="collapse"] {
 
         
         </div>
-        <br />
+
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                <label  for="genre">Genre</label>
+                <label  for="genre">Genre :</label>
                 <select class="form-control"  name="genre" type="text">
                     <option value="Mlle">Mlle</option>
                     <option value="Mr">Mr</option>
@@ -357,11 +367,11 @@ a[data-toggle="collapse"] {
 
         
         </div>
-        <br />
+
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                <label  for="status">Etat</label>
+                <label  for="status">Etat :</label>
                 <select class="form-control"  name="status" type="text">
                     <option value="1">Active</option>
                     <option value="0">Désactiver</option>
@@ -372,7 +382,7 @@ a[data-toggle="collapse"] {
 
         
         </div>
-        
+        <br />
         <div class="form-group">
             <button class="btn btn-primary" style="width:100px">Ajouter</button>&ensp;&ensp;&ensp;&ensp;
             <a href="<?php echo base_url().'auto/index1';?>" class="btn-secondary btn" style="width:100px">Annuler &ensp;&ensp;</a>

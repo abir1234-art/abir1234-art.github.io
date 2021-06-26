@@ -176,35 +176,35 @@ a[data-toggle="collapse"] {
 
       <ul class="list-unstyled components">
         <li>
-        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home"></i>Accueil</a>
+        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home" style="color:black" ></i>Accueil</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users"></i>Clients</a>
+              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users" style="color:black" ></i>Clients</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
+              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt" style="color:black" ></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
+        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
+        </li>
+       
+        <li>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog" style="color:black"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
+        <a href="<?php echo base_url();?>control/view_commande"><i class="fab fa-cuttlefish" style="color:black"></i>Commandes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
+        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart " aria-hidden="true" style="color:black" ></i>Stock</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
+        <a href="<?php echo base_url();?>control/index5"><img src="https://img.icons8.com/ios/50/000000/supplier.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
+        <a href="<?php echo base_url();?>control/view_category"><img src="https://img.icons8.com/ios/50/000000/category.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Catégories</a>
         </li>
-        <li>
-        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
-        </li>
-        
-
-        
+      
+       
       </ul>
     </nav>
     <div id="content">
@@ -224,18 +224,24 @@ a[data-toggle="collapse"] {
     
     <form action="<?php echo base_url().'control/edit_categorie/'.$user['id'];?>" method="POST">
       <div class="col-sm-8 col-xs-12">
+    
         <h1>Modifier Catégorie</h1>
+        <br />
+        <br />
     <div class="row">
       <div class="col-sm-6 ol-xs-8">
             <div class="form-group">
-            <label for="name">Nom Catégorie</label>
+            <label for="name">Nom Catégorie :</label>
             <input type="text" name="name" value="<?php echo set_value('name',$user['name']);?>" placeholder="Entrer categorie produit" class="form-control">
             <?php echo form_error('name');?>
           </div>
 
             
         </div>
+        <br />
     <br />
+    <br />
+        <br />
     
     <div class="form-group">
             <button class="btn btn-primary" style="width:100px">Modifier</button>&ensp;&ensp;&ensp;&ensp;

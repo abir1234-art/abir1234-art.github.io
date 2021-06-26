@@ -93,7 +93,7 @@ span.icon {
         </div>
        
         <div>
-        <a href="<?php echo base_url('auto/MPO')?>" class="pull-right need-help" >mot de passe oublier? </a><span class="clearfix"></span>
+        <a href="<?php echo base_url('auto/MPOR')?>" class="pull-right need-help" >mot de passe oublier? </a><span class="clearfix"></span>
         </div>
         
         </form>

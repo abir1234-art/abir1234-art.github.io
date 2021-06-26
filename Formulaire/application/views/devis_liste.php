@@ -187,7 +187,7 @@ a[data-toggle="collapse"] {
               <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt" style="color:black" ></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
+        <a href="<?php echo base_url();?>control/view_devis"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
         </li>
         <li>
         <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog" style="color:black"></i>Utilisateurs</a>
@@ -204,7 +204,7 @@ a[data-toggle="collapse"] {
         <li>
         <a href="<?php echo base_url();?>control/view_category"><img src="https://img.icons8.com/ios/50/000000/category.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Catégories</a>
         </li>
-        
+       
        
       </ul>
     </nav>
@@ -213,12 +213,12 @@ a[data-toggle="collapse"] {
     <div id="content">
     <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page"> Catégories</li>
+    <li class="breadcrumb-item active" aria-current="page"> Devis client</li>
   </ol>
   </nav>
   <div class="row">
         <div class="text-right">
-          <div class="col-lg-12"><center><h1> Liste Catégories</h1></center></div></div>
+          <div class="col-lg-12"><center><h1> Liste Devis</h1></center></div></div>
           <br /> 
 </div>    
 <br />
@@ -245,8 +245,8 @@ a[data-toggle="collapse"] {
        <div class="col-lg-12 text-right">
        <div class="text-right">
 
-          <a href="<?php echo base_url().'control/addcategory';?>" class="btn btn-info" ><i class="fa fa-plus" aria-hidden="true"></i>Nouvelle Catégories</a>
-          
+          <a href="<?php echo base_url().'control/devis_afficher';?>"class="btn btn-info" ><i class="fa fa-plus" aria-hidden="true"></i>Nouveau devis</a>
+        
         </div>
         
         </div>
@@ -254,33 +254,46 @@ a[data-toggle="collapse"] {
         </div>
         <br />
     <div class="table-responsive">
-    
     <table class="table">
     <tr style="background-color:#3386FF">
-      <th scope="col" style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID</th>
-      <th scope="col" style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nom_category</th>
-      <th scop="col" style="color:white">Action</th>
+      <th scope="col" style="color:white">N° Devis</th>
+      <th scope="col" style="color:white">Date</th>
+      <th scope="col" style="color:white">Durée validité</th>
+      <th scop="col" style="color:white">Opération</th>
     </tr>
     <?php $no=1; 
-                foreach ($details_category  as $category) { ?>
+                foreach ($devis as $dev) { ?>
                    <tr>
-                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo  $category->id; ?></td>
-                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $category->name ?></td>
-                       <td>
-                             <a href="<?php echo base_url();?>control/edit_categorie/<?php echo $category->id;?>" class="btn btn-primary" style="width:115px"><i class="fa fa-pencil fa-fw"></i>Modifier</a>
-                             
+                       <td><?php echo  $dev->ref_devis; ?></td>
+                       <td><?php echo $dev->date ?></td>
+                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $dev->duree ?></td>
+                        <td>  
+                        <?php 
+                           $status1=$dev->status1;
+                             if($status1 =='Envoyer'){
+                             ?>
+                                  <a href="<?php echo base_url();?>control/update_status_devis/<?php echo $dev->ref_devis;?>/<?php echo $dev->status1; ?>" class="btn btn-success">Envoyé</a>
+                             <?php
+                              }
+                              else{
+                                ?>
+                                   <a href="<?php echo base_url();?>control/update_status_devis/<?php echo $dev->ref_devis;?>/<?php echo $dev->status1;?>" class="btn btn-danger">Brouillon</a>
+                              <?php
+                              }
+                              ?>      
+                             <a href="<?php echo base_url();?>control/edit_devis_test_record/<?php echo $dev->ref_devis;?>" class="btn btn-primary" style="width:100px"><i class="fa fa-pencil fa-fw"></i>Edit</a>
+                             <a href="<?php echo base_url('control/pdfdetails_test/'. $dev->ref_devis);?>" class="btn btn-info" style="width:100px">View in PDF</a>
                              
                              
                         
                         </td>
                    </tr>
                 <?php $no++;}?>
-                    
+                
+                        
  
 </table>
 </div>
-  
- 
 <br />
 <?php echo $this->pagination->create_links();?>
 </div>

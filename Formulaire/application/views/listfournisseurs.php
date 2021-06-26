@@ -200,37 +200,37 @@ a[data-toggle="collapse"] {
       <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
       </div>
 
-      
       <ul class="list-unstyled components">
         <li>
-        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home"></i>Accueil</a>
+        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home" style="color:black" ></i>Accueil</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users"></i>Clients</a>
+              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users" style="color:black" ></i>Clients</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
+              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt" style="color:black" ></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
+        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
+        </li>
+   
+        <li>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog" style="color:black"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
+        <a href="<?php echo base_url();?>control/view_commande"><i class="fab fa-cuttlefish" style="color:black"></i>Commandes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
+        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart " aria-hidden="true" style="color:black" ></i>Stock</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
+        <a href="<?php echo base_url();?>control/index5"><img src="https://img.icons8.com/ios/50/000000/supplier.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
-        </li>   
-        <li>
-        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
+        <a href="<?php echo base_url();?>control/view_category"><img src="https://img.icons8.com/ios/50/000000/category.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Catégories</a>
         </li>
-      
-
+        
+       
       </ul>
     </nav>
 
@@ -276,16 +276,37 @@ a[data-toggle="collapse"] {
         </div>
         <br />
         <br />
+        <div class="row">
+          <div class="col-md-8">
+            <form class="form-inline" action="<?php echo base_url() . 'control/filter_fournisseur'; ?>" method="post">
+           
+            <div class="input-group">
+              <select class="form-control" name="field2">
+                  <option selected="selected" disabled="disabled" value="">Filtrer par </option>
+                  <option value="ref_fournisseur">Référence fournisseur</option>
+                  <option value="nom_fournisseur">Nom fournisseur</option>
+                  <option value="email_fournisseur">Email fournisseur</option>
+                  <option value="adresse_fournisseur">Adresse fournisseur</option>
+                  <option value="ice_fournisseur">ICE</option>
+              </select>
+               <input class="form-control" type="text" name="search2" value="" placeholder="Chercher..." >
+               <button class="btn btn-primary" type="submit" name="filter2" type="submit">Chercher</button>
+            </div>
+            </form>
+          </div>    
+        </div>    
         <br />
+        <br />
+        
         <div class="table-responsive">
         <table class="table">
-    <tr>
-      <th scope="col">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ref_fournisseur</th>
-      <th scope="col">nom_fournisseur</th>
-      <th scope="col">email_fournisseur</th>
-      <th scope="col">adresse_fournisseur</th>
-      <th scope="col">tel_forunisseur</th>
-      <th scop="col">Action</th>
+    <tr style="background-color:#3386FF">
+      <th scope="col" style="color:white">Référence fournisseur</th>
+      <th scope="col" style="color:white">Nom fournisseur</th>
+      <th scope="col" style="color:white">Email fournisseur</th>
+      <th scope="col" style="color:white">Adresse fournisseur</th>
+      <th scope="col" style="color:white">Téléphone forunisseur</th>
+      <th scop="col" style="color:white">Opérations</th>
     </tr>
     <?php $no=1; 
                          foreach ($fournisseurs as $fournisseur) { ?>
@@ -309,6 +330,8 @@ a[data-toggle="collapse"] {
  
 </table>
 </div>
+<br />
+<?php echo $this->pagination->create_links();?>
 </div>
 </div>
 </div>
@@ -336,40 +359,40 @@ a[data-toggle="collapse"] {
     <div class="modal-content">
         <form action="<?php echo base_url().'control/ajouter_fournisseur';?>" method="post">
         <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nouvelle Fournisseur</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Nouveau Fournisseur</h5>
         
       </div>
 <div class="modal-body">
         <div class="form-group">
-             <label for="ref_fournisseur">ref_fournisseur</label><br />
+             <label for="ref_fournisseur">Référence fournisseur :</label><br />
              <input type="text" disabled name="ref_fournisseur"   placeholder="<?php  echo $id ?>" class="form-control">
              <?php echo form_error('ref_fournisseur');?>
         </div>
         <div class="form-group">
-             <label for="nom_fournisseur">nom_fournisseur</label><br />
+             <label for="nom_fournisseur">Nom fournisseur :</label><br />
              <input type="text" name="nom_fournisseur" placeholder="Entrer nom fournisseur" class="form-control">
              <?php echo form_error('nom_fournisseur');?>
         </div>
-        <br />
         <div class="form-group">
-             <label for="email_fournisseur">email_fournisseur</label><br />
-             <input type="text" name="email_fournisseur" placeholder="Entrer email fournisseur" class="form-control">
+             <label for="email_fournisseur">Email fournisseur :</label><br />
+             <input type="email" name="email_fournisseur" placeholder="Entrer email fournisseur" class="form-control">
              <?php echo form_error('email_fournisseur');?>
         </div>
-        <br />
-        
         <div class="form-group">
-             <label for="adresse_fournisseur">adresse_fournisseur</label><br />
+             <label for="ice_fournisseur">ICE fournisseur:</label><br />
+             <input type="text"  name="ice_fournisseur"   placeholder="Entrer ice fournisseur" class="form-control">
+             <?php echo form_error('ice_fournisseur');?>
+        </div>
+        <div class="form-group">
+             <label for="adresse_fournisseur">Adresse fournisseur :</label><br />
              <input type="text" name="adresse_fournisseur" placeholder="Entrer adresse fournisseur" class="form-control">
              <?php echo form_error('adresse_fournisseur');?>
         </div>
-        <br />
         <div class="form-group">
-             <label for="tel_fournisseur">tel_fournisseur</label><br />
+             <label for="tel_fournisseur">Téléphone fournisseur :</label><br />
              <input type="number" name="tel_fournisseur" placeholder="Entrer telephone fournisseur" class="form-control">
              <?php echo form_error('tel_fournisseur');?>
         </div>
-        <br />
       </div>
       
       <div class="modal-footer">

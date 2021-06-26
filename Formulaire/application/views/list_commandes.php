@@ -178,35 +178,35 @@ a[data-toggle="collapse"] {
 
       <ul class="list-unstyled components">
         <li>
-        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home"></i>Accueil</a>
+        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home" style="color:black" ></i>Accueil</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users"></i>Clients</a>
+              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users" style="color:black" ></i>Clients</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
+              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt" style="color:black" ></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
+        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
         </li>
-        <li>
-        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
-        </li>
-        <li>
-        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
-        </li>
-        <li>
-        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
-        </li>
-        <li>
-        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
-        </li> 
-        <li>
-        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
-        </li>
-     
-
         
+        <li>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog" style="color:black"></i>Utilisateurs</a>
+        </li>
+        <li>
+        <a href="<?php echo base_url();?>control/view_commande"><i class="fab fa-cuttlefish" style="color:black"></i>Commandes</a>
+        </li>
+        <li>
+        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart " aria-hidden="true" style="color:black" ></i>Stock</a>
+        </li>
+        <li>
+        <a href="<?php echo base_url();?>control/index5"><img src="https://img.icons8.com/ios/50/000000/supplier.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Fournisseurs</a>
+        </li>
+        <li>
+        <a href="<?php echo base_url();?>control/view_category"><img src="https://img.icons8.com/ios/50/000000/category.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Catégories</a>
+        </li>
+      
+       
       </ul>
     </nav>
 
@@ -252,23 +252,18 @@ a[data-toggle="collapse"] {
         
         </div>
         <br />
-       
-        <br />
         <div class="row">
           <div class="col-md-8">
-            <form class="form-inline" action="<?php echo base_url() . 'auto/filter'; ?>" method="post">
+            <form class="form-inline" action="<?php echo base_url() . 'control/filter_commande'; ?>" method="post">
            
             <div class="input-group">
-              <select class="form-control" name="field">
+              <select class="form-control" name="field1">
                   <option selected="selected" disabled="disabled" value="">Filtrer par </option>
-                  <option value="ref_client">Référence</option>
-                  <option value="nom">Nom</option>
-                  <option value="prenom">Prenom</option>
-                  <option value="mail">Email Name</option>
+                  <option value="numero_commande">Numero_commande</option>
+                  <option value="date_commande">Date</option>
               </select>
-               <input class="form-control" type="text" name="search" value="" placeholder="Chercher..." >
-               <button class="btn btn-primary" type="submit" name="filter" type="submit">Chercher</button>
-               
+               <input class="form-control" type="text" name="search1" value="" placeholder="Chercher..." >
+               <button class="btn btn-primary" type="submit" name="filter1" type="submit">Chercher</button>
             </div>
             </form>
           </div>    
@@ -284,9 +279,9 @@ a[data-toggle="collapse"] {
           <div class="table-responsive">
       <table class="table">
     <tr style="background-color:#3386FF">
-    <th  scope="col" style="color:white">Numéro_commande</th>
-    <th  scope="col" style="color:white">Date_commande</th>
-    <th  scope="col" style="color:white">Total_commande</th>
+    <th  scope="col" style="color:white">Numéro commande</th>
+    <th  scope="col" style="color:white">Date commande</th>
+    <th  scope="col" style="color:white">Total commande</th>
     <th  scope="col" with="60" style="color:white">Action</th>
     </tr>
     <?php $i=1;

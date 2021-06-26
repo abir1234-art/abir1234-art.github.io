@@ -12,7 +12,6 @@
     <link rel="stylesheet" type="text/css" href="<?php base_url(); ?>assets/css/bootstrap.css">
 <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <title>Hello, world!</title>
     <style>
 
@@ -49,11 +48,11 @@ i { margin: 0 7px; }
 .wrapper {
   display: flex;
   width: 100%;
-  height:100%;
   align-items: stretch;
 }.wrapper {
   display: flex;
   width: 100%;
+  height:100%;
   align-items: stretch;
 }#sidebar {
     min-width: 250px;
@@ -157,10 +156,10 @@ a[data-toggle="collapse"] {
 
     <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <li class="nav-item active">
+        <li class="nav-item active">
            <a class="nav-link" id="link" href="<?php echo base_url('auto/login');?>">
               <i class="fas fa-sign-out-alt"></i>
-          Déconnecté<span class="sr-only">(current) </span></a>
+              Déconnecté<span class="sr-only">(current) </span></a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" id="link" href="<?php echo base_url('sendemail');?>">
@@ -168,14 +167,13 @@ a[data-toggle="collapse"] {
         </li>
       </ul>
     </div>
-</nav>
-<div class="wrapper fixed-left">
+  </nav>
+  <div class="wrapper fixed-left">
     <nav id="sidebar">
       <div class="sidebar-header">
       <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
       </div>
 
-      
       <ul class="list-unstyled components">
         <li>
         <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home" style="color:black" ></i>Accueil</a>
@@ -189,6 +187,7 @@ a[data-toggle="collapse"] {
         <li>
         <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
         </li>
+   
         <li>
         <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog" style="color:black"></i>Utilisateurs</a>
         </li>
@@ -208,89 +207,60 @@ a[data-toggle="collapse"] {
        
       </ul>
     </nav>
-    
-
     <div id="content">
     <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page"> Catégories</li>
+  <li class="breadcrumb-item"><a href="<?php echo base_url();?>control/index">Produits</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Ajouter nouvelle Categorie</li>
   </ol>
-  </nav>
-  <div class="row">
-        <div class="text-right">
-          <div class="col-lg-12"><center><h1> Liste Catégories</h1></center></div></div>
-          <br /> 
-</div>    
-<br />
- <hr>
-  <br />
- 
-    <div class="row">
-            <div class="col-md-12">
-              <?php 
-                $success=$this->session->userdata('success');
-                if($success !=""){?>
-                <div class="alert alert-success"><?php echo $success;?></div>
-                <?php } ?>
-                <?php if(isset($_SESSION['error'])){?>
-                 <div class="alert alert-danger"><?php echo $_SESSION['error'];?></div>
-                <?php
-                }
-               ?>
-            </div>
-    </div>
-    
-   
-    <div class="text-right">
-       <div class="col-lg-12 text-right">
-       <div class="text-right">
+</nav>
 
-          <a href="<?php echo base_url().'control/addcategory';?>" class="btn btn-info" ><i class="fa fa-plus" aria-hidden="true"></i>Nouvelle Catégories</a>
-          
-        </div>
-        
-        </div>
-        
-        </div>
+    <?php if(isset($_SESSION['error'])){?>
+       <div class="alert alert-danger"><?php echo $_SESSION['error'];?></div>
+    <?php
+    }
+    ?>
+
+    
+    <form action="<?php echo base_url().'control/addcategory';?>" method="POST">
+      <div class="col-sm-8 col-xs-12">
+        <h1>Nouvelle Catégorie</h1>
         <br />
-    <div class="table-responsive">
+        <br />
+       
+    <div class="row">
+      <div class="col-sm-6 ol-xs-8">
+            <div class="form-group">
+            <label for="name">Nom Catégorie :</label>
+            <input type="text" name="name" placeholder="Entrer categorie produit" class="form-control">
+            <?php echo form_error('name');?>
+          </div>
+
+            
+        </div>
+    <br />
+    <br />
+    <br />
+        <br />
     
-    <table class="table">
-    <tr style="background-color:#3386FF">
-      <th scope="col" style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID</th>
-      <th scope="col" style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nom_category</th>
-      <th scop="col" style="color:white">Action</th>
-    </tr>
-    <?php $no=1; 
-                foreach ($details_category  as $category) { ?>
-                   <tr>
-                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo  $category->id; ?></td>
-                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $category->name ?></td>
-                       <td>
-                             <a href="<?php echo base_url();?>control/edit_categorie/<?php echo $category->id;?>" class="btn btn-primary" style="width:115px"><i class="fa fa-pencil fa-fw"></i>Modifier</a>
-                             
-                             
-                             
-                        
-                        </td>
-                   </tr>
-                <?php $no++;}?>
-                    
- 
-</table>
+    <div class="form-group">
+            <button class="btn btn-primary" style="width:100px">Ajouter</button>&ensp;&ensp;&ensp;&ensp;
+            <a href="<?php echo base_url().'control/view_category';?>" class="btn-secondary btn" style="width:100px">Annuler &ensp;&ensp;</a>
+        </div>
 </div>
+</div>
+       
+    </form>
+    
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+ 
   
- 
-<br />
-<?php echo $this->pagination->create_links();?>
-</div>
-</div>
-
-
-
-
-
-
+  
     </footer>
    <!-- Footer --> 
    <footer class="bg-light text-center text-lg-start">
@@ -301,7 +271,12 @@ a[data-toggle="collapse"] {
   </div>
   <!-- Copyright -->
 </footer>
-<!-- Optional JavaScript -->
+
+ 
+  
+    
+
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -321,11 +296,13 @@ a[data-toggle="collapse"] {
           });
       });
       </script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"    crossorigin="anonymous"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  
-</body>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"    crossorigin="anonymous"></script>
+  </body>
 </html>
+
+
+
+    
+

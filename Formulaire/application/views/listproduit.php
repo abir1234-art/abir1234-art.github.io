@@ -202,34 +202,35 @@ a[data-toggle="collapse"] {
 
       <ul class="list-unstyled components">
         <li>
-        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home"></i>Accueil</a>
+        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home" style="color:black" ></i>Accueil</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users"></i>Clients</a>
+              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users" style="color:black" ></i>Clients</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
+              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt" style="color:black" ></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
+        <a href="<?php echo base_url();?>control/view_devis"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
+        </li>
+
+        <li>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog" style="color:black"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
+        <a href="<?php echo base_url();?>control/view_commande"><i class="fab fa-cuttlefish" style="color:black"></i>Commandes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
+        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart " aria-hidden="true" style="color:black" ></i>Stock</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
+        <a href="<?php echo base_url();?>control/index5"><img src="https://img.icons8.com/ios/50/000000/supplier.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
-        </li>
-        <li>
-        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
+        <a href="<?php echo base_url();?>control/view_category"><img src="https://img.icons8.com/ios/50/000000/category.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Catégories</a>
         </li>
        
-
+       
       </ul>
     </nav>
 
@@ -268,7 +269,7 @@ a[data-toggle="collapse"] {
   <br />
   
           <div class="clear-fix">
-               <a href="<?php echo base_url().'control/addproduit';?>" class="btn btn-info" style="float:right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nouveau Produit</a>
+               <a href="<?php echo base_url().'control/addproduit';?>" class="btn btn-info" style="float:right" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Nouveau Produit&nbsp;/&nbsp;Service </a>
                 </div><br /><br />
                 
               
@@ -298,7 +299,7 @@ a[data-toggle="collapse"] {
                 
     <th scope="col"  style="color:white">Quantité</th>
     <th  scope="col"  style="color:white">&nbsp;&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>                       
-    <th scope="col"  style="color:white">&nbsp;&nbsp;Action&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+    <th scope="col"  style="color:white">&nbsp;&nbsp;Opérations&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
     </tr>
                    <?php $no=1; 
                          foreach ($mahasiswa as $row) { ?>
@@ -383,34 +384,34 @@ a[data-toggle="collapse"] {
     <div class="modal-content">
         <form action="<?php echo base_url().'control/addproduit';?>" method="post">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajouter Produit</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajouter Produit&nbsp;/&nbsp;Service</h5>
         
       </div>
       <div class="modal-body">
         <div class="form-group">
-             <label for="reference">Référence</label><br />
+             <label for="reference">Référence :</label><br />
              <input type="text"  disabled name="reference"  placeholder="<?php  echo $id ?>" class="form-control">
         </div>
     
         
         <div class="form-group">
-             <label for="nom_produit">Nom_Produit</label><br />
-             <input type="text" name="nom_produit" placeholder="Entrer nom produit" class="form-control">
+             <label for="nom_produit">Désignation :</label><br />
+             <input type="text" name="nom_produit" placeholder="Entrer désignation Produit / Service" class="form-control">
         </div>
     
         <div class="form-group">
-             <label for="prix">Prix_Produit</label><br />
-             <input type="text" name="prix" placeholder="Entrer prix produit" class="form-control">
+             <label for="prix">Prix Produit :</label><br />
+             <input type="text" name="prix" placeholder="Entrer prix Produit / Service" class="form-control">
         </div>
        
         <div class="form-group">
-             <label for="quantite">Quantite_Produit</label><br />
-             <input type="text" name="quantite" placeholder="Entrer quantite produit" class="form-control">
+             <label for="quantite">Quantite Produit :</label><br />
+             <input type="text" name="quantite" placeholder="Entrer quantite Produit / Service" class="form-control">
         </div>
    
         <div class="form-group">
         
-           <label  for="category_id">Catégorie</label>
+           <label  for="category_id">Catégorie Produit :</label>
            <select class="form-control"  name="category_id" type="text">
               <?php foreach($details_category as $category) : ?>
               <option  value="<?php  echo $category->id;?>"><?php echo $category->name;?></option>
@@ -420,7 +421,7 @@ a[data-toggle="collapse"] {
            
         <div class="form-group">
         
-        <label for="nom_fournisseur">nom_fournisseur</label><br />
+        <label for="nom_fournisseur">Nom Fournisseur :</label><br />
         <select class="form-control"  name="nom_fournisseur" type="text">
         <?php foreach($fournisseurs as $fr) : ?>
             <option  value="<?php  echo $fr->ref_fournisseur;?>"><?php echo $fr->nom_fournisseur;?></option>

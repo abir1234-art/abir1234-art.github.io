@@ -126,7 +126,7 @@ class auto extends CI_Controller{
                 */
             
         else{
-                    $this->session->set_flashdata("error","invalid email id or password");
+                    $this->session->set_flashdata("error","email ou le mot de passe incorrect");
                     redirect("auto/login","refresh");
 
             }
@@ -136,9 +136,29 @@ class auto extends CI_Controller{
         } 
     #$this->load->view('login');
     }
-    public function view_utilisateurs(){
+    public function view_utilisateurs($offset=0){
         $this->load->model('create_model');
-        $data['connexion']=$this->create_model->getallutilisateurs();
+        $this->load->library('pagination');
+        $config['base_url']=base_url('auto/view_utilisateurs');
+        $config['per_page']=10;
+        $config['reuse_query_string']=TRUE;
+        $config['total_rows']=$this->create_model->getTotalRowsutilisateur();
+        $config['next_link']='Next';
+        $config['prev_link']='Previous';
+        $config['full_tag_open']="<ul class='pagination'>";
+        $config['full_tag_close']='</ul>';
+        $config['next_tag_open']='<li class="page-item disabled">';
+        $config['next_tag_close']='</li>';
+        $config['prev_tag_open']='<li class="page-item">';
+        $config['prev_tag_close']='</li>';
+        $config['num_tag_open']='<li class="page-item">';
+        $config['num_tag_close']='</li>';
+        $config['cur_tag_open']='<li class="page-item active"><a class="page-link">';
+        $config['cur_tag_close']='<span class="sr-only">(current)</span></a></li>';
+        $config['attributes']=array('class'=>'page-link');
+        $this->pagination->initialize($config);
+        $this->load->model('create_model');
+        $data['connexion']=$this->create_model->getallutilisateurs($config['per_page'],$offset);
         $this->load->view('list_utilisateur',$data);
         
                
@@ -288,7 +308,7 @@ class auto extends CI_Controller{
            $formarray['type_user']=$this->input->post('type_user');
            $formarray['status']=$this->input->post('status');
            $this->create_model->updateusers($userid,$formarray);
-           $this->session->set_flashdata('success','les données dutilisateur est modifier ');
+           $this->session->set_flashdata('success','les données utilisateur est modifier ');
            #redirect('control/modifier');
            redirect(base_url().'auto/view_utilisateurs');
 
@@ -534,6 +554,11 @@ class auto extends CI_Controller{
 		}		
 		return $id = $this->create_model->get_id_client($auto_id,'CLT');		
 	}*/
+    public function garde(){
+        #$data['clients']=$this->create_model->getallclients3(); 
+        $this->load->view("page_admin");
+
+    }
     public function index1($offset=0){
         $this->load->model('create_model');
         
@@ -564,7 +589,7 @@ class auto extends CI_Controller{
     public function keyword(){
         $key=$this->input->post('title');
         $data['users']=$this->create_model->research($key);
-        $this->load->view('list',$data);
+        $this->load->view('list_client',$data);
 
     }
     public function filter(){
@@ -574,12 +599,12 @@ class auto extends CI_Controller{
 
         if(isset($filter)&& !empty($search)) {
                 $this->load->model('create_model');
-                $data['clients'] = $this->create_model->getStudentsWhereLike($field,$search);
+                $data['clients'] = $this->create_model->getclientsWhereLike($field,$search);
         }else{
                 $this->load->model('create_model');
                 $data['clients'] = $this->create_model->getall();
         }
-        $this->load->view("list",$data);
+        $this->load->view("list_client",$data);
     }
     public function index7(){
 		$data['new_id'] = $this->get_client();	 
@@ -599,6 +624,7 @@ class auto extends CI_Controller{
         $this->form_validation->set_rules('ville','Ville','required');
         $this->form_validation->set_rules('genre','genre','required');
         $this->form_validation->set_rules('status','Etat','required');
+        $this->form_validation->set_rules('ice','ICE','required');
         $this->form_validation->set_error_delimiters("<div class='text-danger'>","</div>");
         if($this->form_validation->run() ==  False){
             //$data['new_id'] = $this->get_client();
@@ -621,8 +647,9 @@ class auto extends CI_Controller{
             $formarray['nom_ville']= $this->input->post('ville');
             $formarray['gender']= $this->input->post('genre');
             $formarray['status']= $this->input->post('status');
+            $formarray['ice']= $this->input->post('ice');
             $this->create_model->create($formarray);
-            $this->session->set_flashdata('success','record added successfuly');
+            $this->session->set_flashdata('success','le client est ajouter avec success');
             redirect(base_url().'auto/index1');
 
         }
@@ -646,6 +673,7 @@ class auto extends CI_Controller{
         $this->form_validation->set_rules('ville','Ville','required');
         $this->form_validation->set_rules('gender','Genre','required');
         $this->form_validation->set_rules('status','Etat','required');
+        $this->form_validation->set_rules('ice','ICE','required');
         if($this->form_validation->run() ==  False){
 
             $this->load->view('edit_file',$data);
@@ -661,8 +689,9 @@ class auto extends CI_Controller{
             $formarray['adresse']=$this->input->post('adresse');
             $formarray['gender']=$this->input->post('gender');
             $formarray['status']=$this->input->post('status');
+            $formarray['ice']=$this->input->post('ice');
             $this->create_model->updateuser($userid,$formarray);
-            $this->session->set_flashdata('success','record update successfuly');
+            $this->session->set_flashdata('success','les données de client est modifier avec success');
             #redirect('control/modifier');
             redirect(base_url().'auto/index1');
 
@@ -690,11 +719,11 @@ class auto extends CI_Controller{
 
 	    //send id and status to the model to update the status
 	    if($this->create_model->update_status($id,$status)){
-                $this->session->set_flashdata('success','client status updated successfully');
+                $this->session->set_flashdata('success','le client est active avec success');
                    
         }
         else{
-                $this->session->set_flashdata('faileur','client status not  updated successfully');
+                $this->session->set_flashdata('faileur','le client est désactiver');
         
 
         }

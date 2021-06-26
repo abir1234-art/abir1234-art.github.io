@@ -176,40 +176,42 @@ a[data-toggle="collapse"] {
 
       <ul class="list-unstyled components">
         <li>
-        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home"></i>Accueil</a>
+        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home" style="color:black" ></i>Accueil</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users"></i>Clients</a>
+              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users" style="color:black" ></i>Clients</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
+              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt" style="color:black" ></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
+        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog" style="color:black"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog"></i>Utilisateurs</a>
+        <a href="<?php echo base_url();?>control/view_commande"><i class="fab fa-cuttlefish" style="color:black"></i>Commandes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index5">Fournisseurs</a>
+        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart " aria-hidden="true" style="color:black" ></i>Stock</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/view_category">Catégories</a>
+        <a href="<?php echo base_url();?>control/index5"><img src="https://img.icons8.com/ios/50/000000/supplier.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Fournisseurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/view_commande">Commandes</a>
+        <a href="<?php echo base_url();?>control/view_category"><img src="https://img.icons8.com/ios/50/000000/category.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Catégories</a>
         </li>
+       
+       
       </ul>
     </nav>
 
 
     <div id="content">
     <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="<?php echo base_url();?>control/index5">PRODUITS</a></li>
-    <li class="breadcrumb-item active" aria-current="page">MODIFIER Fournisseur</li>
+    <li class="breadcrumb-item"><a href="<?php echo base_url();?>control/index5">Fournisseurs</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Modifier Fournisseur</li>
   </ol>
 </nav>
 
@@ -222,39 +224,46 @@ a[data-toggle="collapse"] {
         <div class="row">
             <div class="col-lg-6">
         <div class="form-group">
-             <label for="ref_fournisseur">ref_fournisseur :</label><br />
+             <label for="ref_fournisseur">Référence fournisseur :</label><br />
              <input type="text" name="ref_fournisseur"  disabled value="<?php echo $single_fournisseurs->ref_fournisseur;?>" placeholder="Entrer Référence fournisseur" class="form-control">
              <?php echo form_error('ref_fournisseur');?>
         </div>
         </div>
         </div>
-        <br />
         <div class="row">
             <div class="col-lg-6">
 
                 <div class="form-group">
-                    <label for="nom_fournisseur">nom_fournisseur :</label>
+                    <label for="nom_fournisseur">Nom fournisseur :</label>
                     <input type="text" name="nom_fournisseur" value="<?php echo $single_fournisseurs->nom_fournisseur;?>" class="form-control" placeholder="Entrer nom fournisseur"> 
                     <?php echo form_error('nom_fournisseur');?>
                 </div>
             </div>
         </div>
-        <br />
         <div class="row">
             <div class="col-lg-6">
 
                 <div class="form-group">
-                    <label for="email_fournisseur">email_fournisseur :</label>
-                    <input type="text" name="email_fournisseur" value="<?php echo $single_fournisseurs->email_fournisseur;?>" class="form-control" placeholder="Entrer email fournisseur"> 
+                    <label for="email_fournisseur">Email fournisseur :</label>
+                    <input type="email" name="email_fournisseur" value="<?php echo $single_fournisseurs->email_fournisseur;?>" class="form-control" placeholder="Entrer email fournisseur"> 
                     <?php echo form_error('email_fournisseur');?>
                 </div>
             </div>
         </div>
-        <br />
+        <div class="row">
+            <div class="col-lg-6">
+
+        <div class="form-group">
+             <label for="ice_fournisseur">ICE fournisseur:</label><br />
+             <input type="text"  name="ice_fournisseur"   value="<?php echo $single_fournisseurs->ice_fournisseur;?>" class="form-control">
+             <?php echo form_error('ice_fournisseur');?>
+        </div>
+</div>
+</div>
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="adresse_fournisseur">adresse_fournisseur :</label>
+                    <label for="adresse_fournisseur">Adresse fournisseur :</label>
                     <input type="text" name="adresse_fournisseur" value="<?php echo $single_fournisseurs->adresse_fournisseur;?>" class="form-control" placeholder="Entrer adresse fournisseur"> 
                     <?php echo form_error('adresse_fournisseur');?>
                 </div>
@@ -262,11 +271,10 @@ a[data-toggle="collapse"] {
                 
             </div>
         </div>
-        <br />
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label for="tel_fournisseur">tel_fournisseur :</label>
+                    <label for="tel_fournisseur">Téléphone fournisseur :</label>
                     <input type="number" name="tel_fournisseur" value="<?php echo $single_fournisseurs->tel_fournisseur;?>" class="form-control" placeholder="Entrer téléphone fournisseur"> 
                     <?php echo form_error('tel_fournisseur');?>
                 </div>
@@ -276,9 +284,7 @@ a[data-toggle="collapse"] {
                
             </div>
         </div>
-      
         <br />
-     
         <div class="row">
             <div class="col-lg-6">
         <div class="form-group">

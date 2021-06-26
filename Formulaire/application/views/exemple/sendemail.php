@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,45 +13,8 @@
 <link href="<?php echo base_url(); ?>assets/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Hello, world!</title>
-    <link rel="stylesheet" type="text/css" href="<?php base_url(); ?>assets/css/bootstrap.css">
-    <style type="text/css">
- body{
-         background-repeat: no-repeat;
-         height: 100%;
-         background-position: center;
-         background-size: cover;
-         background-size: fixed
-       
-    
+    <style>
 
-
-   }
-     .btn{
-         margin-top: 40px;
-         margin-bottom: 150px;
-     }
-     input#file-input{
-       display : none;
-       margin-top: 100px;
-       margin-bottom: 350px;
-       width:800px;
-       height:1000px;
-     }
-     input#file-input + label{
-       background-color:#0066ff;
-       padding:8px;
-       color:#fff;
-       border:2px solid #9ec3ff;
-       border-radius:9px;
-       margin-left:20px;
-    
-     }
-     input#file-input + label:hover{
-       background-color:#3b73ce;
-       border-color:#729fe7;
-       cursor:pointer;
-
-     } 
 .blue {
 background:#2abdfc;
 color: #fff;
@@ -86,6 +48,7 @@ i { margin: 0 7px; }
 .wrapper {
   display: flex;
   width: 100%;
+  height:100%;
   align-items: stretch;
 }.wrapper {
   display: flex;
@@ -174,6 +137,32 @@ a[data-toggle="collapse"] {
     display: none;
   }
 }
+
+.card {
+    overflow:hidden;
+}
+
+.card-body .rotate {
+    z-index: 8;
+    float: right;
+    height: 100%;
+}
+
+.card-body .rotate i {
+    color: rgba(20, 20, 20, 0.15);
+    position: absolute;
+    left: 0;
+    left: auto;
+    right: -10px;
+    bottom: 0;
+    display: block;
+    -webkit-transform: rotate(-44deg);
+    -moz-transform: rotate(-44deg);
+    -o-transform: rotate(-44deg);
+    -ms-transform: rotate(-44deg);
+    transform: rotate(-44deg);
+}
+
     </style>
   </head>
   <body>
@@ -208,41 +197,39 @@ a[data-toggle="collapse"] {
 <div class="wrapper fixed-left">
     <nav id="sidebar">
       <div class="sidebar-header">
-        <h3><i class="fas fa-user"></i>Admin</h3>
+        <h4><i class="fas fa-user"></i><?php echo $_SESSION['username']?></h4>
       </div>
 
       <ul class="list-unstyled components">
-
         <li>
-        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home"></i>Accueil</a>
+        <a href="<?php echo base_url();?>auto/admin"><i class="fas fa-home" style="color:black" ></i>Accueil</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users"></i>Clients</a>
+              <a href="<?php echo base_url();?>auto/index1"><i class="fas fa-users" style="color:black" ></i>Clients</a>
         </li>
         <li>
-              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt"></i>Produits</a>
+              <a href="<?php echo base_url();?>control/index"><i class="fab fa-product-hunt" style="color:black" ></i>Produits</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/index2"><i class="fa fa-file-text" style="font-size:18px"></i>Devis client</a>
+        <a href="<?php echo base_url();?>control/view_devis"><i class="fa fa-file-text" style="font-size:18px;color:black;" ></i>Devis client</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart" aria-hidden="true"></i>Ventes</a>
+        <a href="<?php echo base_url();?>auto/view_utilisateurs"><i class="fas fa-user-cog" style="color:black"></i>Utilisateurs</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listfournisseurs"><i class="fas fa-user-cog"></i>Fournisseurs</a>
+        <a href="<?php echo base_url();?>control/view_commande"><i class="fab fa-cuttlefish" style="color:black"></i>Commandes</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>auto/listcommandes">Commandes</a>
+        <a href="<?php echo base_url();?>control/listventes"><i class="fa fa-shopping-cart " aria-hidden="true" style="color:black" ></i>Stock</a>
         </li>
         <li>
-        <a href="<?php echo base_url();?>control/liststocks">Stcoks</a>
+        <a href="<?php echo base_url();?>control/index5"><img src="https://img.icons8.com/ios/50/000000/supplier.png" style=" height: 25px;width: 30px;margin: auto background-color:white;">&nbsp;Fournisseurs</a>
         </li>
         <li>
-          <a href=""><i class="fas fa-hands-helping"></i>Services</a>
+        <a href="<?php echo base_url();?>control/view_category"><img src="https://img.icons8.com/ios/50/000000/category.png" style=" height: 25px;width: 25px;margin: auto background-color:white;">&nbsp;Catégories</a>
         </li>
-        <li>
-          <a href=""><i class="fas fa-info"></i>About</a>
-        </li>
+       
+       
       </ul>
     </nav>
 
